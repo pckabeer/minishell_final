@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 00:25:16 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/11 20:49:21 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/11 21:54:45 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,55 +81,28 @@ void tblock_counter(t_cblock *tcb, char *str)
 		}
 		else
 		{
-			while (str[i] != ' ' && str[i])
+			if (str[i] == '\'')
 			{
-				if (str[i] == '\'')
-				{
-					i++;
-					while (str[i] != '\'' && str[i])
-						i++;
-						// i--;
-				}
-				else if (str[i] == '"')
-				{
-				printf("hi");
-					i++;
-					while (str[i] != '"' && str[i])
-						i++;
-					// i--;
-				}
 				i++;
+				printf("%s \n",str+i);
+				while (str[i] != '\'' && str[i])
+					i++;
 			}
-			tcb->cmd_ctr++;
+			else if (str[i] == '"')
+			{
+				i++;
+				while (str[i] != '"' && str[i])
+					i++;
+			}
+			else
+			{
+				i++;
+				while (str[i] != ' ' && str[i])
+					i++;
+			}
+				tcb->cmd_ctr++;
 			printf("\n");
 		}
-		// else if (str[i] == ' ')
-		// {
-		// 	i++;
-		// 	while (str[i] == ' '&& str[i])
-		// 		i++;
-		// 	while (str[i] != ' '&& str[i])
-		// 	{
-		// 		if (str[i] == '\'')
-		// 		{
-		// 			while (str[i] != '\'' && str[i])
-		// 				i++;
-		// 		}
-		// 		if (str[i] == '"')
-		// 		{
-		// 			while (str[i] != '"' && str[i])
-		// 				i++;
-		// 		}
-		// 		// else
-		// 			break ;
-		// 	}
-		// 	printf("before -- %d -- %d  -- %d\n", tcb->input_ctr, tcb->output_ctr ,tcb->cmd_ctr + 1);
-		// 	while (str[i] != ' ' && str[i])
-		// 		i++;
-		// 	tcb->cmd_ctr++;
-		// 			printf("after -- %d -- %d  -- %d\n", tcb->input_ctr, tcb->output_ctr ,tcb->cmd_ctr + 1);
-
-		// }
 		if (str[i] == '\0')
 			break ;
 		i++;
