@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/11 20:10:02 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/11 23:50:13 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,21 @@ void	parse_split_elements(t_msvar *msv)
 
 void	parse_count_pipe(t_msvar *msv)
 {
-	while (msv->rline[msv->i++])
+	while (msv->rline[msv->i])
 	{		
 		if (msv->parse_error)
 			return ;
 		if (msv->rline[msv->i] == '\'')
-			parse_quote_block(msv);
+			parse_split_q(msv);
 		else if (msv->rline[msv->i] == '"')
-			parse_dquote_block(msv);
+			parse_split_dq(msv);
 		else if (msv->rline[msv->i] == '>')
 			parse_gt_block(msv);
 		else if (msv->rline[msv->i] == '<')
 			parse_lt_block(msv);
 		else if (msv->rline[msv->i] == '|')
 			parse_pipe_block(msv);
+		msv->i++;
 	}
 }
 
