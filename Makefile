@@ -6,7 +6,7 @@
 #    By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 18:36:40 by kpanikka          #+#    #+#              #
-#    Updated: 2022/12/12 18:53:08 by kpanikka         ###   ########.fr        #
+#    Updated: 2022/12/12 21:15:57 by kpanikka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,12 @@ RMFLAG  = -f
 
 PARSING	=	minishell parse execute error dlist echo  \
 		parse_spl_char parse_quote env elist util pwd dir \
-		export parse_split parse_split_helper
+		export parse_split parse_split_helper parse_expand
 
 EXECUTION = execution file_util	
 	  
 
-SRC =$(addsuffix .c, $(addprefix parsing/, $(PARSING))) \
+SRC =	$(addsuffix .c, $(addprefix parsing/, $(PARSING))) \
 		$(addsuffix .c,$(addprefix execution/, $(EXECUTION))) \
 
 LIBFT	= -L libft -lft

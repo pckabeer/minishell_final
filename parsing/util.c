@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 16:29:56 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/10 20:08:16 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/13 00:54:49 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,13 @@ char	*ft_get_dword(char *str)
 	while (ft_isalnum(str[i]))
 		i++;
 	return (ft_substr(str, 0, i));
+}
+
+char	*ft_strjoinchr(char *str, char ch)
+{
+	char	*temp_two;
+
+	temp_two = ft_calloc(2, 1);
+	temp_two[0] = ch;
+	return (ft_strjoin(str, temp_two));
 }

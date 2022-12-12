@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:03 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/12 13:53:59 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/13 01:10:59 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	read_loop(t_msvar *msv)
 		else
 			clean_exit(msv);
 		parse(msv);
-	
 		if (!msv->parse_error)
 			ft_exec(msv);
 		else

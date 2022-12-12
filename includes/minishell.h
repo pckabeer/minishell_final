@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/12 19:26:35 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/13 01:10:54 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct minishellvariables
 	t_env		*env_list;	
 	char		*temp;
 	char		*b_temp;
-	char 		delimit;
+	char		delimit;
 	t_cblock	*cmd_block_arr;
 }t_msvar;
 
@@ -149,7 +149,12 @@ void	init_t_cblock(t_cblock *tcb);
 char	*tb_join(char *str, char *output, int start, int i);
 int		parse_split_lt(t_cblock *tbc, int i, int start, char *str);
 int		parse_split_gt(t_cblock *tbc, int i, int start, char *str);
+int		parse_split_qh(t_cblock *tcb, int i, int start, char *str);
+int		parse_split_dqh(t_cblock *tcb, int i, int start, char *str);
+int		parse_split_h(t_cblock *tcb, int i, int start, char *str);
 
+void	parse_expand(t_msvar *msv, int i, char *str);
+char	*ft_strjoinchr(char *str, char ch);
 
 
 //*****************dir.c******************//
