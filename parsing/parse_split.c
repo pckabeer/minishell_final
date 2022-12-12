@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 00:25:16 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/12 16:36:26 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:04:48 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,15 @@ char	*tb_join(char *str, char *output, int start, int i)
 {
 	char	c;
 
-	c = DELIMIT;
+	c = 2;
+	printf("String :%s Output: %s Start: %d Len: %d\n", str, output, start, i);
 	if (output)
 	{
 		output = ft_strjoin(output, &c);
-		output = ft_strjoin(output, ft_substr(str, start, i - start));
+		output = ft_strjoin(output, ft_substr(str, start, (i - start) -1));
 	}
 	else
-		output = ft_strdup(ft_substr(str, start, i - start));
+		output = ft_strdup(ft_substr(str, start, (i - start) -1));
 	//printf(" string : %s\n",output);
 
 	return(output);

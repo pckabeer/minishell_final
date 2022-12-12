@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/12 16:51:53 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:53:46 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	parse(t_msvar *msv)
 		cbd[msv->i].output = ft_split(cbd[msv->i].output_h, 2);
 		cbd[msv->i].cmd = ft_split(cbd[msv->i].cmd_h, 2);
 		ic = 0;
-		while (cbd[msv->i].input[ic])
+		while (cbd[msv->i].cmd[ic])
 		{
-			printf("-- %s \n",cbd[msv->i].input[ic]);
+			printf("-- %s \n",cbd[msv->i].cmd[ic]);
 			ic++;
 		}
 		
