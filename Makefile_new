@@ -1,0 +1,53 @@
+NAME	= minishell
+cc		= gcc -g
+CFLAG	= -Wall -Werror -Wextra  -I includes/ -I libft/ -g -fsanitize=address
+RMFLAG  = -f
+
+
+PARSING	=	minishell parse execute error dlist echo  \
+		parse_spl_char parse_quote env elist util pwd dir \
+		export parse_split
+
+EXECUTION = execution file_util	
+	  
+
+SRC =$(addsuffix .c, $(addprefix parsing/, $(PARSING))) \
+		$(addsuffix .c,$(addprefix execution/, $(EXECUTION))) \
+
+
+SRC1		= minishell.c parse.c execute.c error.c dlist.c echo.c  \
+		parse_spl_char.c parse_quote.c env.c elist.c util.c pwd.c dir.c \
+		export.c parse_split.c
+LIBFT	= -L libft -lft
+
+
+OBJS	= $(SRC:.c=.o)
+
+all		: $(NAME)
+
+bonus	: all
+ 
+%.o : %.c
+	$(CC) $(CFLAG) -c $< -o $@
+
+clean	:
+		@make clean -C libft/
+		$(RM) $(RMFLAG) $(OBJS)
+
+fclean	: clean
+	$(RM) $(RMFLAG) $(NAME)
+
+re		: fclean all
+
+$(NAME) : $(OBJS)
+		@echo "\n"
+		@echo "\033[0;32m*************************\n"
+		@make -C libft/
+
+		@echo "Compiling minishell...\n"
+		@echo "*************************\n"
+
+		@$(cc) $(CFLAG) $(OBJS) -o  $(NAME) $(LIBFT) -lreadline 
+		@echo "\n\033[0mDone !"
+
+.PHONY : all clean fclean re
