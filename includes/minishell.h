@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/12 14:30:38 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/12 19:26:35 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct cmd_block
 	int		output_ctr;
 	int		cmd_ctr;
 	int		err_flag;
-	char 	delimit;
+	char	delimit;
 
 }	t_cblock;
 
@@ -147,6 +147,9 @@ char	*ft_substr2(char *s, unsigned int start, size_t	len);
 void	tblock_counter(t_cblock *tcb, char *str);
 void	init_t_cblock(t_cblock *tcb);
 char	*tb_join(char *str, char *output, int start, int i);
+int		parse_split_lt(t_cblock *tbc, int i, int start, char *str);
+int		parse_split_gt(t_cblock *tbc, int i, int start, char *str);
+
 
 
 //*****************dir.c******************//

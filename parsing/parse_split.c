@@ -6,30 +6,12 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 00:25:16 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/12 17:04:48 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/12 19:25:13 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <string.h>
-
-void	parse_split_q(t_msvar *msv)
-{
-	msv->i++;
-	while (msv->rline[msv->i] != '\'' && msv->rline[msv->i] != '\0')
-		msv->i++;
-	if (msv->rline[msv->i] != '\'')
-		msv->parse_error = 2;
-}
-
-void	parse_split_dq(t_msvar	*msv)
-{
-	msv->i++;
-	while (msv->rline[msv->i] != '"' && msv->rline[msv->i] != '\0')
-		msv->i++;
-	if (msv->rline[msv->i] != '"')
-		msv->parse_error = 3;
-}
 
 void	init_t_cblock(t_cblock *tcb)
 {
@@ -47,20 +29,18 @@ void	init_t_cblock(t_cblock *tcb)
 
 char	*tb_join(char *str, char *output, int start, int i)
 {
-	char	c;
+	char	*tmp;
 
-	c = 2;
-	printf("String :%s Output: %s Start: %d Len: %d\n", str, output, start, i);
+	tmp = calloc(2, 1);
+	tmp[0] = 2;
 	if (output)
 	{
-		output = ft_strjoin(output, &c);
-		output = ft_strjoin(output, ft_substr(str, start, (i - start) -1));
+		output = ft_strjoin(output, tmp);
+		output = ft_strjoin(output, ft_substr(str, start, (i - start)));
 	}
 	else
-		output = ft_strdup(ft_substr(str, start, (i - start) -1));
-	//printf(" string : %s\n",output);
-
-	return(output);
+		output = ft_strdup(ft_substr(str, start, (i - start)));
+	return (output);
 }
 
 void	tblock_counter(t_cblock *tcb, char *str)
@@ -76,28 +56,29 @@ void	tblock_counter(t_cblock *tcb, char *str)
 		start = i;
 		if (str[i] == '<')
 		{
-			i++;
-			if (str[i] == '<')
-				i++;
-			while (str[i] && str[i] == ' ')
-				i++;
-			while (str[i] && str[i] != ' ' && str[i] != '>' && str[i] != '<')
-				i++;
-			tcb->input_h = tb_join(str, tcb->input_h, start, i);
-			tcb->input_ctr++;
+		// 	i++;
+		// 	if (str[i] == '<')
+		// 		i++;
+		// 	while (str[i] && str[i] == ' ')
+		// 		i++;
+		// 	while (str[i] && str[i] != ' ' && str[i] != '>' && str[i] != '<')
+		// 		i++;
+		// 	tcb->input_h = tb_join(str, tcb->input_h, start, i);
+		// 	tcb->input_ctr++;
+			i = parse_split_lt(tcb, i, start, str);
 		}
 		else if (str[i] == '>')
 		{
-			// printf("2>start : %s\n",str+i);
-			i++;
-			if (str[i] == '>')
-				i++;
-			while (str[i] && str[i] == ' ')
-				i++;
-			while (str[i] && str[i] != ' ' && str[i] != '>' && str[i] != '<')
-				i++;
-			tcb->output_h = tb_join(str, tcb->output_h, start, i);
-			tcb->output_ctr++;
+			// i++;
+			// if (str[i] == '>')
+			// 	i++;
+			// while (str[i] && str[i] == ' ')
+			// 	i++;
+			// while (str[i] && str[i] != ' ' && str[i] != '>' && str[i] != '<')
+			// 	i++;
+			// tcb->output_h = tb_join(str, tcb->output_h, start, i);
+			// tcb->output_ctr++;
+			i = parse_split_gt(tcb, i, start, str);
 		}
 		else if (str[i] == '\'')
 		{
@@ -110,18 +91,15 @@ void	tblock_counter(t_cblock *tcb, char *str)
 		}
 		else if (str[i] == '"')
 		{
-			// printf("4>start : %s\n",str+i);
 			i++;
 			while (str[i] && str[i] != '"')
 				i++;
 			i++;
-			// printf("4>end : %s\n",str+i);
 			tcb->cmd_h = tb_join(str, tcb->cmd_h, start, i);
 			tcb->cmd_ctr++;
 		}
 		else
 		{
-			// printf("5 - i : %d - %c\n", i, str[i]);
 			i++;
 			while (str[i] && str[i] != ' ' && str[i] != '>' && str[i] != '<')
 				i++;
