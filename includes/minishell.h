@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/11 19:04:30 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/12 14:30:38 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 # include <signal.h>
 # include <unistd.h>
 # include <dirent.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# define DELIMIT 2
 
 typedef struct s_env
 {
@@ -61,10 +62,15 @@ typedef struct cmd_block
 	char	**input;
 	char	**output;
 	char	**cmd;
+	char	*input_h;
+	char	*output_h;
+	char	*cmd_h;
 	int		input_ctr;
 	int		output_ctr;
 	int		cmd_ctr;
 	int		err_flag;
+	char 	delimit;
+
 }	t_cblock;
 
 /*
@@ -88,6 +94,7 @@ typedef struct minishellvariables
 	t_env		*env_list;	
 	char		*temp;
 	char		*b_temp;
+	char 		delimit;
 	t_cblock	*cmd_block_arr;
 }t_msvar;
 
@@ -112,16 +119,16 @@ void	ft_exec(t_msvar *msv);
 void	ft_exec_echo(t_msvar *msv);
 
 t_dlist	*ft_dlstnew(char *data, int cmd_seq, int len_q, char q);
-void	ft_dlstadd_back(t_dlist **lst, t_dlist *new);
-void	ft_dlstadd_front(t_dlist **lst, t_dlist *new);
+void	ft_dlstadd_back(t_dlist **lst, t_dlist *new1);
+void	ft_dlstadd_front(t_dlist **lst, t_dlist *new1);
 int		ft_dlstsize(t_dlist *lst);
 void	ft_dlstclear(t_dlist **lst);
 t_dlist	*ft_dlstlast(t_dlist *lst);
 int		ft_dlstprt(t_dlist *lst);
 
 t_env	*ft_elstnew(char *key, char *value);
-void	ft_elstadd_back(t_env **lst, t_env *new);
-void	ft_elstadd_front(t_env **lst, t_env *new);
+void	ft_elstadd_back(t_env **lst, t_env *new1);
+void	ft_elstadd_front(t_env **lst, t_env *new1);
 int		ft_elstsize(t_env *lst);
 void	ft_elstclear(t_env **lst);
 t_env	*ft_elstlast(t_env *lst);
@@ -139,11 +146,12 @@ char	*ft_substr2(char *s, unsigned int start, size_t	len);
 
 void	tblock_counter(t_cblock *tcb, char *str);
 void	init_t_cblock(t_cblock *tcb);
+char	*tb_join(char *str, char *output, int start, int i);
 
 
 //*****************dir.c******************//
-int	getDirList(char *str);
-int	ls(t_msvar *lst);
+int		getDirList(char *str);
+int		ls(t_msvar *lst);
 
 //***********export.c****************//
 void	ft_exec_export(t_msvar *lst);

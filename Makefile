@@ -6,18 +6,27 @@
 #    By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 18:36:40 by kpanikka          #+#    #+#              #
-#    Updated: 2022/12/11 12:36:58 by kpanikka         ###   ########.fr        #
+#    Updated: 2022/12/12 12:57:27 by kpanikka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME	= minishell
 cc		= gcc -g
-CFLAG	= -Wall -Werror -Wextra -I libft/ -g -fsanitize=address
+CFLAG	= -Wall -Werror -Wextra -I includes/ -I libft/ -g -fsanitize=address
 RMFLAG  = -f
-SRC		= minishell.c parse.c execute.c error.c dlist.c echo.c  \
-		parse_spl_char.c parse_quote.c env.c elist.c util.c pwd.c dir.c \
-		export.c parse_split.c
+
+
+PARSING	=	minishell parse execute error dlist echo  \
+		parse_spl_char parse_quote env elist util pwd dir \
+		export parse_split
+
+EXECUTION = execution file_util	
+	  
+
+SRC =$(addsuffix .c, $(addprefix parsing/, $(PARSING))) \
+		$(addsuffix .c,$(addprefix execution/, $(EXECUTION))) \
+
 LIBFT	= -L libft -lft
 
 

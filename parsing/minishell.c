@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:03 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/11 19:04:33 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:53:59 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_minishell(t_msvar	*msv)
 	msv->b_temp = NULL;
 	msv->i = 0;
 	msv->cmd_arr = NULL;
+	msv->delimit = DELIMIT;
 }
 
 /*
