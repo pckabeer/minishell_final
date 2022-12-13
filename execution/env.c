@@ -1,0 +1,68 @@
+#include "minishell.h"
+int count_cmd1(t_env *t_cmd)
+{
+    t_env *tmp;
+    tmp = t_cmd;
+    int i;
+    i = 0;
+    while (tmp)
+    {
+        i++;
+        tmp = tmp->next;
+    }
+    return i;
+}
+
+char **env_to_str(t_env *env)
+{
+    char **str;
+    char *s;
+    char *temp;
+    int n;
+    int i;
+
+    n = count_cmd1(env);
+    str = (char **)malloc(sizeof(char *) * n);
+        if (!str)
+            perror("error:");
+
+     i = 0;
+    while (i < n )
+    {
+        s = ft_strjoin(env->key," = ");
+        temp = s;
+        s = ft_strjoin(s,env->value);
+        *(str+i) = (char *)malloc(sizeof(char)*(strlen(s)+1));
+        str[i]=ft_strdup(s);
+      //  printf("\n------------env---------\n");
+      //  printf("%s\n",str[i]);
+        free(temp);
+        free(s);
+env=env->next;
+        i++;
+    }
+
+return(str);
+}
+/*
+t_env	*load_env1(char **env)
+{
+	int		i;
+	char	*value;
+	char	*temp;
+	t_env	*env_lst;
+
+	i = 0;
+	while (env[i])
+	{
+		temp = ft_get_word(env[i], '=');
+		value = ft_strdup(env[i] + ft_strlen(temp) + 1);
+		env_lst = ft_elstnew(temp, value);
+		if (env_lst)
+			ft_elstadd_back(&msv->env_list, env_lst);
+		else
+			clean_exit(msv);
+		i++;
+	}
+    return(env_lst);
+}*/
