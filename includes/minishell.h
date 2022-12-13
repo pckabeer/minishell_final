@@ -23,6 +23,7 @@
 # include <string.h>
 # include <unistd.h>
 # define DELIMIT 2
+#include<fcntl.h>
 
 typedef struct s_env
 {
@@ -97,6 +98,16 @@ typedef struct minishellvariables
 	char				*b_temp;
 	char				delimit;
 	t_cblock			*cmd_block_arr;
+	
+	int pid;
+
+
+	
+	int **fd;
+	int f1;
+	int f2;
+	char **cmd_path;
+	char *cmd;
 }						t_msvar;
 
 t_msvar					g_msv;
@@ -170,5 +181,19 @@ int						ls(t_msvar *lst);
 
 //***********export.c****************//
 void					ft_exec_export(t_msvar *lst);
+
+
+//***************Execution**************//
+int count_cmd(t_cblock *t_cmd);
+int execution(t_cblock *t_cmd, t_env *env,t_msvar *mvar);
+char	*ft_strjoin(char const *s1, char const *s2);
+int check_input(char **process_file);
+int check_output(char **process_file);
+
+t_env	*load_env1(char **env);
+char **env_to_str(t_env *env);
+
+char	*get_cmd(t_msvar **mvar, char *cmd);
+
 
 #endif
