@@ -21,7 +21,7 @@ PARSING	=	minishell parse execute error dlist echo  \
 		parse_spl_char parse_quote env elist util pwd dir \
 		export parse_split parse_split_helper parse_expand
 
-EXECUTION = execution file_util	
+EXECUTION = execution file_util	env validation
 	  
 
 SRC =	$(addsuffix .c, $(addprefix parsing/, $(PARSING))) \
