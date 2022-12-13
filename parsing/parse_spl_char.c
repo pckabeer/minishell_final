@@ -6,48 +6,48 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 00:13:22 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/11 12:52:35 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:23:46 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parse_gt_block(t_msvar *msv)
+void	parse_gt_block(void)
 {
-	if (msv->rline[msv->i + 1] == '>')
+	if (g_msv.rline[g_msv.i + 1] == '>')
 	{
-		msv->i++;
-		if (msv->rline[msv->i + 1] == '>')
+		g_msv.i++;
+		if (g_msv.rline[g_msv.i + 1] == '>')
 		{
-			msv->i++;
-			msv->parse_error = 4;
+			g_msv.i++;
+			g_msv.parse_error = 4;
 		}
 	}
 }
 
-void	parse_lt_block(t_msvar *msv)
+void	parse_lt_block(void)
 {
-	if (msv->rline[msv->i + 1] == '<')
+	if (g_msv.rline[g_msv.i + 1] == '<')
 	{
-		msv->i++;
-		if (msv->rline[msv->i + 1] == '<')
+		g_msv.i++;
+		if (g_msv.rline[g_msv.i + 1] == '<')
 		{
-			msv->i++;
-			msv->parse_error = 5;
+			g_msv.i++;
+			g_msv.parse_error = 5;
 		}
 	}
 }
 
-void	parse_pipe_block(t_msvar *msv)
+void	parse_pipe_block(void)
 {
-	if (msv->rline[msv->i + 1] == '|')
+	if (g_msv.rline[g_msv.i + 1] == '|')
 	{
-			msv->i++;
-			msv->parse_error = 6;
+			g_msv.i++;
+			g_msv.parse_error = 6;
 	}
 	else
 	{
-		msv->rline[msv->i] = 2 ;
-		msv->num_pipe++;
+		g_msv.rline[g_msv.i] = 2 ;
+		g_msv.num_pipe++;
 	}
 }

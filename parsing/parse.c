@@ -6,83 +6,101 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/12 22:58:38 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/13 18:50:27 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parse_split_elements(t_msvar *msv)
+void	parse_split_elements(void)
 {
-	while (msv->rline[msv->i++])
-	{			
-		if (msv->parse_error)
+	while (g_msv.rline[g_msv.i++])
+	{
+		if (g_msv.parse_error)
 			return ;
-		if (msv->parse_error == 1)
+		if (g_msv.parse_error == 1)
 			break ;
-		if (msv->rline[msv->i] == '\'')
-			parse_quote_block(msv);
-		else if (msv->rline[msv->i] == '"')
-			parse_dquote_block(msv);
-		else if (msv->rline[msv->i] == '$')
-			parse_dollar_block(msv);
-		else if (msv->rline[msv->i] == '>')
-			parse_gt_block(msv);
-		else if (msv->rline[msv->i] == '<')
-			parse_lt_block(msv);
-		else if (msv->rline[msv->i] == '|')
-			parse_pipe_block(msv);
+		if (g_msv.rline[g_msv.i] == '\'')
+			parse_quote_block();
+		else if (g_msv.rline[g_msv.i] == '"')
+			parse_dquote_block();
+		else if (g_msv.rline[g_msv.i] == '$')
+			parse_dollar_block();
+		else if (g_msv.rline[g_msv.i] == '>')
+			parse_gt_block();
+		else if (g_msv.rline[g_msv.i] == '<')
+			parse_lt_block();
+		else if (g_msv.rline[g_msv.i] == '|')
+			parse_pipe_block();
 	}
-		msv->w_len = 0;
+	g_msv.w_len = 0;
 }
 
-void	parse_count_pipe(t_msvar *msv)
+void	parse_count_pipe(void)
 {
-	while (msv->rline[msv->i])
-	{		
-		if (msv->parse_error)
+	while (g_msv.rline[g_msv.i])
+	{
+		if (g_msv.parse_error)
 			return ;
-		if (msv->rline[msv->i] == '\'')
-			parse_split_q(msv);
-		else if (msv->rline[msv->i] == '"')
-			parse_split_dq(msv);
-		else if (msv->rline[msv->i] == '>')
-			parse_gt_block(msv);
-		else if (msv->rline[msv->i] == '<')
-			parse_lt_block(msv);
-		else if (msv->rline[msv->i] == '|')
-			parse_pipe_block(msv);
-		msv->i++;
+		if (g_msv.rline[g_msv.i] == '\'')
+			parse_split_q();
+		else if (g_msv.rline[g_msv.i] == '"')
+			parse_split_dq();
+		else if (g_msv.rline[g_msv.i] == '>')
+			parse_gt_block();
+		else if (g_msv.rline[g_msv.i] == '<')
+			parse_lt_block();
+		else if (g_msv.rline[g_msv.i] == '|')
+			parse_pipe_block();
+		g_msv.i++;
 	}
 }
 
-void	parse(t_msvar *msv)
+void	expand(void)
 {
 	t_cblock	*cbd;
 	int			ic;
 
-	if (msv->parse_error)
+	if (g_msv.parse_error)
 		return ;
-	cbd = msv->cmd_block_arr;
-	parse_count_pipe(msv);
-	msv->cmd_arr = ft_split(msv->rline, 2);
-	msv->i = -1;
-	printf("num pipes : %d \n", msv->num_pipe + 1);
-	cbd = calloc(sizeof(t_cblock), msv->num_pipe + 1);
-	while (msv->cmd_arr[++msv->i])
+	cbd = g_msv.cmd_block_arr;
+	ic = -1;
+	while (cbd[g_msv.i].cmd[++ic])
+		cbd[g_msv.i].cmd[ic] = parse_expand(g_msv.i, cbd[g_msv.i].cmd[ic]);
+	ic = -1;
+	while (cbd[g_msv.i].input[++ic])
+		cbd[g_msv.i].input[ic] \
+			= parse_expand_io(g_msv.i, cbd[g_msv.i].input[ic]);
+	ic = -1;
+	while (cbd[g_msv.i].output[++ic])
+		cbd[g_msv.i].output[ic] \
+			= parse_expand_io(g_msv.i, cbd[g_msv.i].output[ic]);
+}
+
+void	parse(void)
+{
+	t_cblock	*cbd;
+
+	if (g_msv.parse_error)
+		return ;
+	parse_count_pipe();
+	g_msv.cmd_arr = ft_split(g_msv.rline, 2);
+	g_msv.i = -1;
+	printf("num pipes : %d \n", g_msv.num_pipe + 1);
+	g_msv.cmd_block_arr = calloc(sizeof(t_cblock), g_msv.num_pipe + 1);
+	cbd = g_msv.cmd_block_arr;
+	while (g_msv.cmd_arr[++g_msv.i])
 	{
-		init_t_cblock(&cbd[msv->i]);
-		msv->cmd_arr[msv->i] = ft_strtrim(msv->cmd_arr[msv->i], " ");
-		tblock_counter(&cbd[msv->i], msv->cmd_arr[msv->i]);
-		cbd[msv->i].input = ft_split(cbd[msv->i].input_h, 2);
-		cbd[msv->i].output = ft_split(cbd[msv->i].output_h, 2);
-		cbd[msv->i].cmd = ft_split(cbd[msv->i].cmd_h, 2);
-		ic = 0;
-		while (cbd[msv->i].cmd[ic])
-		{
-			parse_expand(msv, msv->i, cbd[msv->i].cmd[ic]);
-			ic++;
-		}
-		printf("input : %d -- output : %d  --command : %d\n", cbd[msv->i].input_ctr, cbd[msv->i].output_ctr ,cbd[msv->i].cmd_ctr);
+		init_t_cblock(&cbd[g_msv.i]);
+		g_msv.cmd_arr[g_msv.i] = ft_strtrim(g_msv.cmd_arr[g_msv.i], " ");
+		tblock_counter(&cbd[g_msv.i], g_msv.cmd_arr[g_msv.i]);
+		cbd[g_msv.i].input = ft_split(cbd[g_msv.i].input_h, 2);
+		cbd[g_msv.i].output = ft_split(cbd[g_msv.i].output_h, 2);
+		cbd[g_msv.i].cmd = ft_split(cbd[g_msv.i].cmd_h, 2);
+		expand();
+		printf("input : %d -- output : %d  --command : %d\n",
+			cbd[g_msv.i].input_ctr,
+			cbd[g_msv.i].output_ctr,
+			cbd[g_msv.i].cmd_ctr);
 	}
 }

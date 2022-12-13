@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/13 01:10:54 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:14:01 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,25 +98,26 @@ typedef struct minishellvariables
 	t_cblock	*cmd_block_arr;
 }t_msvar;
 
-void	parse(t_msvar *msv);
-void	parse_error(t_msvar *msv);
-void	parse_gt_block(t_msvar *msv);
-void	parse_lt_block(t_msvar *msv);
-void	parse_pipe_block(t_msvar *msv);
-void	parse_quote_block(t_msvar *msv);
-void	parse_dquote_block(t_msvar *msv);
-void	parse_split_q(t_msvar *msv);
-void	parse_split_dq(t_msvar *msv);
-char	*parse_dollar_block(t_msvar *msv);
-void	parse_nospl_block(t_msvar *msv);
+t_msvar	g_msv;
+void	parse(void);
+void	parse_error(void);
+void	parse_gt_block(void);
+void	parse_lt_block(void);
+void	parse_pipe_block(void);
+void	parse_quote_block(void);
+void	parse_dquote_block(void);
+void	parse_split_q(void);
+void	parse_split_dq(void);
+char	*parse_dollar_block(void);
+void	parse_nospl_block(void);
 
-void	load_env(t_msvar *msv, char **env);
+void	load_env(char **env);
 char	*ft_getenv(char *str, t_env *env_list);
 
-void	clean_exit(t_msvar *msv);
-// void	ft_exec(t_msvar *msv);
-void	ft_exec(t_msvar *msv);
-void	ft_exec_echo(t_msvar *msv);
+void	clean_exit(void);
+// void	ft_exec(void);
+void	ft_exec(void);
+void	ft_exec_echo(void);
 
 t_dlist	*ft_dlstnew(char *data, int cmd_seq, int len_q, char q);
 void	ft_dlstadd_back(t_dlist **lst, t_dlist *new1);
@@ -153,7 +154,8 @@ int		parse_split_qh(t_cblock *tcb, int i, int start, char *str);
 int		parse_split_dqh(t_cblock *tcb, int i, int start, char *str);
 int		parse_split_h(t_cblock *tcb, int i, int start, char *str);
 
-void	parse_expand(t_msvar *msv, int i, char *str);
+char	*parse_expand(int i, char *str);
+char	*parse_expand_io(int i, char *str);
 char	*ft_strjoinchr(char *str, char ch);
 
 

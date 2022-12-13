@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:09:38 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/11/24 21:22:52 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:23:46 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_exec_echo_q(t_dlist *temp)
 	return ;
 }
 
-void	ft_exec_echo_dq(t_dlist *temp, t_msvar *msv)
+void	ft_exec_echo_dq(t_dlist *temp)
 {		
 	int	i;
 
@@ -28,7 +28,7 @@ void	ft_exec_echo_dq(t_dlist *temp, t_msvar *msv)
 	while (temp->content[i])
 	{
 		if (temp->content[i] == '$')
-			ft_putstr_fd(ft_getenv(temp->content + 1, msv->env_list), 1);
+			ft_putstr_fd(ft_getenv(temp->content + 1, g_msv.env_list), 1);
 		else
 			ft_putchar_fd(temp->content[i], 1);
 		i++;
@@ -36,21 +36,21 @@ void	ft_exec_echo_dq(t_dlist *temp, t_msvar *msv)
 	return ;
 }
 
-void	ft_exec_echo(t_msvar *msv)
+void	ft_exec_echo(void)
 {
 	t_dlist	*temp;
 
-	if (msv->block_list->next)
+	if (g_msv.block_list->next)
 	{
-		temp = msv->block_list->next;
+		temp = g_msv.block_list->next;
 		if (temp->quote == '\'')
 			ft_exec_echo_q(temp);
 		else if (temp->quote == '\"')
-			ft_exec_echo_dq(temp, msv);
+			ft_exec_echo_dq(temp);
 		else
 		{
 		}
 	}
-	//ft_putstr_fd(msv->rline+5, 1);
+	//ft_putstr_fd(msv.rline+5, 1);
 	ft_putchar_fd('\n', 1);
 }

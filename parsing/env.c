@@ -6,13 +6,13 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:51:05 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/12 23:42:36 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:23:46 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	load_env(t_msvar *msv, char **env)
+void	load_env(char **env)
 {
 	int		i;
 	char	*value;
@@ -26,9 +26,9 @@ void	load_env(t_msvar *msv, char **env)
 		value = ft_strdup(env[i] + ft_strlen(temp) + 1);
 		env_lst = ft_elstnew(temp, value);
 		if (env_lst)
-			ft_elstadd_back(&msv->env_list, env_lst);
+			ft_elstadd_back(&g_msv.env_list, env_lst);
 		else
-			clean_exit(msv);
+			clean_exit();
 		i++;
 	}
 }
@@ -47,6 +47,8 @@ char	*ft_getenv(char *str, t_env *env_list)
 	}
 	return (NULL);
 }
+
+
 
 int	ft_elstprint(t_env *lst)
 {
