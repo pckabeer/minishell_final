@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:02:23 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/13 18:23:59 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/13 20:42:58 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*parse_expand(int i, char *str)
 	}
 	while (str[j])
 		temp = ft_strjoinchr(temp, str[j++]);
-	printf("%s\n", temp);
+	//printf("%s\n", temp);
 	return (temp);
 }
 

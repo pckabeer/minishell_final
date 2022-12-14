@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:03 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/13 19:56:28 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/13 19:47:04 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int	read_loop(void)
 			clean_exit();
 		parse();
 		if (!g_msv.parse_error)
-			ft_exec();//execution(g_msv.cmd_block_arr, g_msv.env_list, &g_msv);
+		{
+			//printf("testing");
+			execution(g_msv.cmd_block_arr, g_msv.env_list, &g_msv);
+		}
 		else
 			parse_error();
 		//ft_dlstprt(msv.block_list); /// check print
