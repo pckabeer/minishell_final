@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/15 01:32:26 by skabeer           #+#    #+#             */
+/*   Updated: 2022/12/15 01:32:39 by skabeer          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 int count_cmd1(t_env *t_cmd)
 {
-    t_env *tmp;
-    tmp = t_cmd;
-    int i;
-    i = 0;
-    while (tmp)
-    {
-        i++;
-        tmp = tmp->next;
-    }
-    return i;
+	t_env *tmp;
+	tmp = t_cmd;
+	int i;
+	i = 0;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return i;
 }
 
 char **env_to_str(t_env *env)
