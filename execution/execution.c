@@ -74,8 +74,26 @@ void echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 {
     (void)env;
     (void)mvar;
-    (void)i;
-    ft_putstr_fd(tmp->cmd[1], 1);
+    if(ft_strncmp(tmp->cmd[1],"-n",3)==0)
+    {
+            i = 2;
+        while (tmp->cmd[i])
+        {
+        ft_putstr_fd(tmp->cmd[i++], 1);
+        }
+
+    }
+    else
+    {
+            i = 1;
+        while (tmp->cmd[i])
+        {
+            ft_putstr_fd(tmp->cmd[i++], 1);
+        }
+        
+            ft_putstr_fd("\n", 1);
+
+    }
     exit(1);
     // int i;
   /*  i = 0;

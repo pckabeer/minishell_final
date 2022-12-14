@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:51:05 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/13 13:23:46 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/14 22:02:40 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,41 @@ void	load_env(char **env)
 		else
 			clean_exit();
 		i++;
+	}
+}
+
+void	export_env(char *key, char *value)
+{
+	int		i;
+	char	*value;
+	char	*temp;
+	t_env	*env_list;
+	t_env	*env_lst;
+
+	i = 0;
+	env_list = g_msv.env_list;
+	if(ft_getenv(key, env_list))
+	{
+		while (env_list)
+		{
+			if (ft_strncmp(key, env_list->key, 32767) == 0)
+				{
+					temp = env_list->value ;
+					env_list->value = value;
+					free(temp);
+					break ;
+				}
+			env_list = env_list->next;
+		}
+	}
+	else
+	{
+		
+		env_lst = ft_elstnew(key, value);
+		if (env_lst)
+			ft_elstadd_back(&g_msv.env_list, env_lst);
+		else
+			clean_exit();
 	}
 }
 
