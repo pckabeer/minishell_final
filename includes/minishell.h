@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/13 19:59:55 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:32:20 by skabeer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,6 @@ t_env	*load_env1(char **env);
 char **env_to_str(t_env *env);
 
 char	*get_cmd(t_msvar **mvar, char *cmd);
-
+void	export_env(char *key, char *value);
 
 #endif
