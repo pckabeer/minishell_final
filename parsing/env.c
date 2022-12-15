@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:51:05 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/15 07:33:45 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/15 07:46:14 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,26 @@ void	load_env(char **env)
 
 void	unset_env(char *key)
 {
-	char	*temp;
+	t_env	*temp;
 	t_env	*env_list;
 	t_env	*env_lst_prev;
 
-	/*env_list = g_msv.env_list;
+	env_list = g_msv.env_list;
+	//*env_lst_prev = NULL;
 	while (env_list)
 	{
 		if (ft_strncmp(key, env_list->key, 32767) == 0)
 			{
+					temp = env_list ;
+					env_lst_prev = env_list->next;
+					free(temp);
+					break ;
 				
 				
-				return (env_list->value);
 			}
+		env_lst_prev = env_list;
 		env_list = env_list->next;
-	}*/
+	}
 	
 }
 
