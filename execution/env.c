@@ -6,7 +6,7 @@
 /*   By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 01:32:26 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/15 01:32:39 by skabeer          ###   ########.fr       */
+/*   Updated: 2022/12/15 10:36:28 by skabeer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char **env_to_str(t_env *env)
     int i;
 
     n = count_cmd1(env);
-    str = (char **)malloc(sizeof(char *) * n);
+    str = (char **)malloc(sizeof(char *) * n+1);
         if (!str)
             perror("error:");
 
@@ -53,6 +53,7 @@ char **env_to_str(t_env *env)
 env=env->next;
         i++;
     }
+	str[i]=NULL;
 
 return(str);
 }
