@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/13 20:38:01 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/15 10:10:20 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,15 @@ void	expand(void)
 	cbd = g_msv.cmd_block_arr;
 	ic = -1;
 	while (cbd[g_msv.i].cmd[++ic])
-		cbd[g_msv.i].cmd[ic] = parse_expand(g_msv.i, cbd[g_msv.i].cmd[ic]);
+		cbd[g_msv.i].cmd[ic] = ft_strjoinchr(parse_expand(g_msv.i, cbd[g_msv.i].cmd[ic]),'\0');
 	ic = -1;
 	while (cbd[g_msv.i].input[++ic])
 		cbd[g_msv.i].input[ic] \
-			= parse_expand_io(g_msv.i, cbd[g_msv.i].input[ic]);
+			= ft_strjoinchr(parse_expand(g_msv.i, cbd[g_msv.i].cmd[ic]),'\0');
 	ic = -1;
 	while (cbd[g_msv.i].output[++ic])
 		cbd[g_msv.i].output[ic] \
-			= parse_expand_io(g_msv.i, cbd[g_msv.i].output[ic]);
+			= ft_strjoinchr(parse_expand(g_msv.i, cbd[g_msv.i].cmd[ic]),'\0');
 }
 
 void	parse(void)
