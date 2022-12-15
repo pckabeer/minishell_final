@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:51:05 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/15 08:01:16 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/15 10:07:13 by skabeer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	load_env(char **env)
 
 void	unset_env(char *key)
 {
-	t_env	*temp;
+	//t_env	*temp;
 	t_env	*env_list;
 	t_env	*env_lst_prev;
 

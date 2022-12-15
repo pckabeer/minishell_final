@@ -6,7 +6,7 @@
 /*   By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/15 09:26:52 by skabeer          ###   ########.fr       */
+/*   Updated: 2022/12/15 10:09:20 by skabeer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)
 	}
 	ev = env_to_str(g_msv.env_list);
 	i =0;
-	while(temp->cmd)
-		ft_putstr_fd(&tmp->cmd[i++],1);
+	//while(temp->cmd)
+	//	ft_putstr_fd(&tmp->cmd[i++],1);
 	if (execve((*mvar)->cmd, temp->cmd, ev) == -1)
 	{
 		ft_putstr_fd("\n", 2);
