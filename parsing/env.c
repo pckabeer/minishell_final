@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:51:05 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/15 07:46:14 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/15 08:01:16 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	unset_env(char *key)
 	{
 		if (ft_strncmp(key, env_list->key, 32767) == 0)
 			{
-					temp = env_list ;
+					//temp = env_list ;
 					env_lst_prev = env_list->next;
-					free(temp);
+					//free(temp);
 					break ;
 				
 				
