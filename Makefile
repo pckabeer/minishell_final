@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+         #
+#    By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 18:36:40 by kpanikka          #+#    #+#              #
-#    Updated: 2022/12/12 21:15:57 by kpanikka         ###   ########.fr        #
+#    Updated: 2022/12/15 09:18:32 by skabeer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME	= minishell
 cc		= gcc -g
-CFLAG	= -Wall -Werror -Wextra -I includes/ -I libft/ -g -fsanitize=address
+CFLAG	= -Wall -Werror -Wextra -I includes/ -I libft/ -g 
 RMFLAG  = -f
 
 

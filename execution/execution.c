@@ -6,7 +6,7 @@
 /*   By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/15 07:09:48 by skabeer          ###   ########.fr       */
+/*   Updated: 2022/12/15 09:26:52 by skabeer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)
 		exit(1);
 	}
 	ev = env_to_str(g_msv.env_list);
+	i =0;
+	while(temp->cmd)
+		ft_putstr_fd(&tmp->cmd[i++],1);
 	if (execve((*mvar)->cmd, temp->cmd, ev) == -1)
 	{
 		ft_putstr_fd("\n", 2);
@@ -147,6 +150,18 @@ void	execute_cmd_start(t_cblock *t_cmd, t_env *env, t_msvar **mvar, int k)
 			dup2(tmp->fd[i][1], 1);
 		execute_cmd_redirect(t_cmd, env, mvar, i);
 	}
+	if (tmp->cmd_num > 1)
+		{
+			if (i > 0)
+				close((tmp)->fd[i - 1][0]);
+			close((tmp)->fd[i][1]);
+		}
+		if ((tmp)->f1 > -1)
+			close((tmp)->f1);
+		if ((tmp)->f2 > -1)
+			close((tmp)->f2);
+	while (waitpid(-1, NULL, 0) > 0)
+			;
 }
 
 int	init_io(t_cblock *t_cmd, t_msvar **mvar)
@@ -186,6 +201,8 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 	create_pipe(&mvar);
 	tmp = t_cmd;
 	i = 0;
+	if (!t_cmd->cmd)
+	return 0;
 	while (tmp)
 	{
 		if (mvar->cmd_num > 1)
@@ -213,19 +230,19 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 			i++;
 			continue ;
 		}
-		execute_cmd_start(tmp, env, &mvar, i);
-	//	while (waitpid(0, 0, 0) < 0)
-	//		;
-		if (mvar->cmd_num > 1)
+		else if(strcmp(tmp->cmd[0], "unset ") == 0)
 		{
-			if (i > 0)
-				close((mvar)->fd[i - 1][0]);
-			close((mvar)->fd[i][1]);
+			//unset_env(char *key);
+			tmp = tmp->next;
+			i++;
+			continue ;
 		}
-		if ((mvar)->f1 > -1)
-			close((mvar)->f1);
-		if ((mvar)->f2 > -1)
-			close((mvar)->f2);
+		execute_cmd_start(tmp, env, &mvar, i);
+
+			
+		//while (waitpid(mvar->pid, 0, 0) < 0)
+		//;
+		
 		i++;
 		tmp = tmp->next;
 	}

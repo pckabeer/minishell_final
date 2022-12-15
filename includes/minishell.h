@@ -6,7 +6,7 @@
 /*   By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/15 07:32:20 by skabeer          ###   ########.fr       */
+/*   Updated: 2022/12/15 09:09:38 by skabeer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <unistd.h>
 # define DELIMIT 2
 #include<fcntl.h>
+
 
 typedef struct s_env
 {
@@ -195,5 +196,5 @@ char **env_to_str(t_env *env);
 
 char	*get_cmd(t_msvar **mvar, char *cmd);
 void	export_env(char *key, char *value);
-
+void	unset_env(char *key);
 #endif

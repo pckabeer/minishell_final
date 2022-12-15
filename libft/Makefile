@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kpanikka <kpanikka@student.42abudhabi.ae>  +#+  +:+       +#+         #
+#    By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/30 13:37:19 by kpanikka          #+#    #+#              #
-#    Updated: 2022/03/08 08:51:48 by kpanikka         ###   ########.fr        #
+#    Updated: 2022/12/15 07:59:44 by skabeer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,9 @@ SRCS			=	ft_tolower.c ft_isdigit.c ft_substr.c ft_calloc.c \
 				ft_strnstr.c ft_strtrim.c ft_substr.c ft_putchar_fd.c \
 				ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 				ft_split.c ft_strmapi.c ft_striteri.c ft_itoa.c	\
+				ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
+				ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
+				ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 BSRCS 			=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 				ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
