@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:02:23 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/13 20:42:58 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:12:54 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,19 @@ char	*parse_expand(int i, char *str)
 			k++;
 			j++;
 		}
-		g_msv.b_temp = ft_get_dword(str + j - k);
-		g_msv.b_temp = ft_getenv(g_msv.b_temp, g_msv.env_list);
-		if (g_msv.b_temp)
-			temp = ft_strjoin(temp, g_msv.b_temp);
+		if(k)
+		{
+			g_msv.b_temp = ft_get_dword(str + j - k);
+			g_msv.b_temp = ft_getenv(g_msv.b_temp, g_msv.env_list);
+			if (g_msv.b_temp)
+				temp = ft_strjoin(temp, g_msv.b_temp);
+		}
+		temp = ft_strjoinchr(temp, '$');
 		k = 0;
 	}
 	while (str[j])
 		temp = ft_strjoinchr(temp, str[j++]);
-	//printf("%s\n", temp);
+	//printf(" --|------ %s\n", temp);
 	return (temp);
 }
 

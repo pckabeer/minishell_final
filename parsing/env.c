@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:51:05 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/15 08:01:16 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:45:29 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	load_env(char **env)
 
 void	unset_env(char *key)
 {
-	t_env	*temp;
+	//t_env	*temp;
 	t_env	*env_list;
 	t_env	*env_lst_prev;
 
