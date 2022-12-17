@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/15 13:47:47 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/15 14:07:36 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	parse(void)
 			cbd[g_msv.i].input_ctr,
 			cbd[g_msv.i].output_ctr,
 			cbd[g_msv.i].cmd_ctr);
-			int j =-1;
+			//int j =-1;
 			// while (cbd[g_msv.i].input[++j])
 			// {
 			// 	printf(" -- %s\n",cbd[g_msv.i].input[j]);
