@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/19 20:50:00 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:21:43 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,148 +36,6 @@ void	create_pipe(t_msvar **mvar)
 	}
 }
 
-int ft_minusn(char *str)
-{
-	int	i;
-
-	i = 0;
-	str = ft_strtrim(str, " ");
-	if(str[i++] == '-')
-	{
-		while (str[i])
-		{
-			if(str[i++] != 'n')
-				return(0);
-		}
-		return(1);
-	}
-	return(0);
-}
-
-void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)
-{
-	char	**ev;
-	t_msvar	*tmp;
-
-	(void) i;
-	(void)*env;
-	tmp = *mvar;
-	tmp->cmd = get_cmd(mvar, temp->cmd[0]);
-	if (!tmp->cmd)
-	{
-		if (ft_strrchr(temp->cmd[0], '/'))
-			ft_putstr_fd(" : No such file or directory\n", 2);
-		else
-		{
-			ft_putstr_fd("command not found: ", 2);
-			ft_putstr_fd(temp->cmd[0],2);
-			ft_putstr_fd("\n", 2);
-		}
-		exit(1);
-	}
-	ev = env_to_str(g_msv.env_list);
-	
-
-		
-	if (execve((*mvar)->cmd, temp->cmd, ev) == -1)
-	{
-		ft_putstr_fd("\n", 2);
-		ft_putstr_fd(temp->cmd[0], 2);
-		perror("cmd_error:");
-		exit(0);
-	}
-}
-
-void	pwdfn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
-{
-	(void)tmp;
-	(void)i;
-	(void)mvar;
-	printf("%s", ft_getenv("PWD", env));
-	exit(1);
-}
-
-void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
-{
-	int j;
-	
-	j = 1;
-	(void)env;
-	(void)mvar;
-	i = ft_minusn(tmp->cmd[1]);
-	printf("%d\n",i);
-	while (tmp->cmd[j + i])
-		ft_putstr_fd(tmp->cmd[i+j++], 1);	
-	if(!i)
-			ft_putchar_fd('\n', 1);
-	
-	exit(1);
-}
-
-int	cd_fn(t_cblock *tmp)
-{
-	if (chdir(ft_strtrim(tmp->cmd[1]," ")) != 0) 
-		perror("cd error");
-	return (0);
-}
-
-int	export_fn(t_cblock *tmp)
-{
-	export_env(ft_strtrim(tmp->cmd[1], " "), ft_strtrim(tmp->cmd[2], " "));
-	return (1);
-}
-
-void	execute_cmd_redirect(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
-{
-	if (tmp->cmd)
-	{
-		if (strcmp(tmp->cmd[0], "echo ") == 0)
-			echo_fn(tmp, env, mvar, i);
-		else if (strcmp(tmp->cmd[0], "pwd ") == 0)
-			pwdfn(tmp, env, mvar, i);
-		else if (strcmp(tmp->cmd[0], "env ") == 0)
-		{
-			ft_elstprint(env);
-			exit(1);
-		}
-		else
-		{
-			execute_cmd(tmp, env, mvar, i);
-		}
-	}
-	else
-		exit (1);
-}
-
-void	execute_cmd_start(t_cblock *t_cmd, t_env *env, t_msvar **mvar, int k)
-{
-	int		n;
-	int		j;
-	t_msvar	*tmp;
-	int		i;
-
-	i = k;
-	tmp = *mvar;
-	tmp->cmd_path = ft_split(ft_getenv("PATH", env), ':');
-	n = tmp->cmd_num;
-	tmp->pid = fork();
-	if (tmp->pid == 0)
-	{
-		i = k;
-		j = k - 1;
-		if ((tmp->f1 > -1))
-			dup2(tmp->f1, 0);
-		else if ((j) > -1)
-			dup2(tmp->fd[j][0], 0);
-		if (tmp->f2 > -1)
-			dup2(tmp->f2, 1);
-		else if (n > 1 && k != (n - 1))
-			dup2(tmp->fd[i][1], 1);
-		execute_cmd_redirect(t_cmd, env, mvar, i);
-	}
-
-}
-
 int	init_io(t_cblock *t_cmd, t_msvar **mvar)
 {
 	t_msvar	*tmp;
@@ -205,6 +63,7 @@ void	mvar_init(t_msvar **mvar)
 	(*mvar)->cmd_num = (*mvar)->num_pipe + 1;
 }
 
+
 int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 {
 	t_cblock	*tmp;
@@ -216,7 +75,7 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 	tmp = t_cmd;
 	i = 0;
 	if (!t_cmd->cmd)
-	return 0;
+		return (0);
 	while (tmp)
 	{
 		if (mvar->cmd_num > 1)
@@ -236,8 +95,9 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 			i++;
 			continue ;
 		}
-		else if (strcmp(tmp->cmd[0], "cd ") == 0)
+		else if (strcmp(ft_strtrim(tmp->cmd[0]," "), "cd") == 0)
 		{
+			printf("kjkkjkjklj");
 			if (mvar->cmd_num == 1)
 				cd_fn(tmp);
 			tmp = tmp->next;
@@ -266,67 +126,31 @@ while (waitpid(-1, NULL, 0) > 0)
 			close((mvar)->f1);
 		if ((mvar)->f2 > -1)
 			close((mvar)->f2);
-	
-			
-		//while (waitpid(mvar->pid, 0, 0) < 0)
-		//;
-		
+
 		i++;
 		tmp = tmp->next;
 	}
 
 	return (0);
 }
-/*
 
-int main(int n, char **av, char **env)
+
+
+
+int ft_minusn(char *str)
 {
-    (void)av;
-    (void)n;
-    t_cblock t_cmd;
-    t_cblock t_cmd1;
-   // t_cblock t_cmd2;
-    t_msvar mvar;
-    t_env *t_env;
-    //   t_cmd=NULL;
+	int	i;
 
-    //	init_minishell(&msv);
-    //load_env(&msv, env);
-
-    init_minishell(&mvar);
-     load_env(&mvar, env);
-  // ft_elstprint(mvar.env_list);
-
-    t_env = NULL;
-
-
-    t_cmd.input = NULL;
-  t_cmd.input = ft_split("abc.txt", ' ');
- t_cmd.output = NULL;
-//  t_cmd.output = ft_split("out123.txt", ' ');
-    t_cmd.cmd = ft_split("export USER 10", ' ');
-
-
-
-t_cmd.next = NULL;
-   t_cmd1.input =NULL;
-    t_cmd1.output = NULL;
-    t_cmd1.cmd = ft_split("printenv", ' ');
-    t_cmd1.next = NULL;
-
-
- //    t_cmd.next = &t_cmd1;
-
-//t_cmd2.input = NULL;
-  //   t_cmd2.output = NULL;
-   //   t_cmd2.cmd = ft_split("/usr/bin/wc -l", ' ');
-
-
-    //t_cmd.next = &t_cmd1;
-    //t_cmd1.next = &t_cmd2;
- //t_cmd2.next = NULL;
-
-
-    execution(&t_cmd, (mvar.env_list),&(mvar));
-   //  execution(&t_cmd1, (mvar.env_list),&(mvar));
-}*/
+	i = 0;
+	str = ft_strtrim(str, " ");
+	if(str[i++] == '-')
+	{
+		while (str[i])
+		{
+			if(str[i++] != 'n')
+				return(0);
+		}
+		return(1);
+	}
+	return(0);
+}

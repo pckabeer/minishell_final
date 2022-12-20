@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/15 09:09:38 by skabeer          ###   ########.fr       */
+/*   Updated: 2022/12/20 15:26:23 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,4 +197,13 @@ char **env_to_str(t_env *env);
 char	*get_cmd(t_msvar **mvar, char *cmd);
 void	export_env(char *key, char *value);
 void	unset_env(char *key);
+
+void	execute_cmd_start(t_cblock *t_cmd, t_env *env, t_msvar **mvar, int k);
+void	execute_cmd_redirect(t_cblock *tmp, t_env *env, t_msvar **mvar, int i);
+void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i);
+void	pwdfn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i);
+void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i);
+int	cd_fn(t_cblock *tmp);
+int	export_fn(t_cblock *tmp);
+int ft_minusn(char *str);
 #endif

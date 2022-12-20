@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+         #
+#    By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 18:36:40 by kpanikka          #+#    #+#              #
-#    Updated: 2022/12/15 10:34:10 by skabeer          ###   ########.fr        #
+#    Updated: 2022/12/20 15:28:07 by kpanikka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ PARSING	=	minishell parse execute error dlist echo  \
 		parse_spl_char parse_quote env elist util pwd dir \
 		export parse_split parse_split_helper parse_expand
 
-EXECUTION = execution file_util	env validation
+EXECUTION = execution file_util	env validation builtin cmd_execution 
 	  
 
 SRC =	$(addsuffix .c, $(addprefix parsing/, $(PARSING))) \
