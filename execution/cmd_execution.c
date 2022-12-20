@@ -73,6 +73,8 @@ void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)
 		exit(1);
 	}
 	ev = env_to_str(g_msv.env_list);
+//print_str(temp->cmd);
+
 	if (execve((*mvar)->cmd, temp->cmd, ev) == -1)
 	{
 		ft_putstr_fd("\n", 2);
@@ -80,4 +82,15 @@ void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)
 		perror("cmd_error:");
 		exit(0);
 	}
+}
+void print_str(char **str)
+{
+    int i;
+    i=0;
+    printf("\n----------------------\n");
+    while(str[i])
+    {
+        printf("*****%s*****\n",str[i++]);
+
+    }
 }

@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/20 15:26:23 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:49:49 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,4 +206,11 @@ void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i);
 int	cd_fn(t_cblock *tmp);
 int	export_fn(t_cblock *tmp);
 int ft_minusn(char *str);
+
+
+
+
+/******temp_util**************/
+
+void print_str(char **str);
 #endif
