@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 00:13:22 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/20 19:34:48 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/20 19:52:03 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	parse_pipe_block(void)
 		return ;
 	}
 	if (!g_msv.i || (g_msv.rline[g_msv.i + j] == '|' && flag_ps))
-			g_msv.echo parse_error = 7;
+			g_msv.parse_error = 7;
 	else if (g_msv.rline[g_msv.i + j] == '|')
 			g_msv.parse_error = 6;
 	else
