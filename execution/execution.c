@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/20 21:38:52 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/20 23:58:08 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,7 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 		//print_str(tmp->output);
 		execute_cmd_start(tmp, env, &mvar, i);
 
-while (waitpid(-1, NULL, 0) > 0)
-			;
-			
+
 	if (mvar->cmd_num > 1)
 		{
 			if (i > 0)
@@ -134,6 +132,10 @@ while (waitpid(-1, NULL, 0) > 0)
 		tmp = tmp->next;
 	}
 
+
+	while (waitpid(-1, NULL, 0) > 0)
+			;
+			
 	return (0);
 }
 
