@@ -22,15 +22,43 @@ void	pwdfn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 	(void)tmp;
 	(void)i;
 	(void)mvar;
+	printf("-------------");
 	printf("%s", ft_getenv("PWD", env));
 	exit(1);
 }
 
-int	cd_fn(t_cblock *tmp)
+int	cd_fn(t_cblock *tmp,t_env *env)
 {
-	if (chdir(ft_strtrim(tmp->cmd[1]," ")) != 0) 
+
+	char *str;
+	char *cwd;
+	cwd = (char *)malloc(sizeof(char)*1028);
+
+	str = NULL;
+	if((tmp->cmd[1])==NULL)
+	{
+		str = ft_getenv("HOME", env);
+	if(str == NULL)
+	{
+		printf("error");
+		return(1);
+		clean_exit();
+	}
+	}
+	else
+	{
+		str=ft_strtrim(tmp->cmd[1]," ");
+	}
+	
+	if(str != NULL)
+	if (chdir(str) != 0) 
 		perror("cd error");
-	return (0);
+	
+	if (getcwd(cwd, 1028) == NULL)
+      perror("getcwd() error");
+    else
+		export_env("PWD", cwd);     //printf("current working directory is: %s\n", cwd);
+		return (0);
 }
 
 int	export_fn(t_cblock *tmp)

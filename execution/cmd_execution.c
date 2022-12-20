@@ -35,8 +35,8 @@ void	execute_cmd_redirect(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 	{
 		if (strcmp(tmp->cmd[0], "echo ") == 0)
 			echo_fn(tmp, env, mvar, i);
-		else if (strcmp(tmp->cmd[0], "pwd ") == 0)
-			pwdfn(tmp, env, mvar, i);
+		else if (strcmp(tmp->cmd[0], "pwd") == 0)
+			pwdfn(tmp, env, mvar, i);		
 		else if (strcmp(tmp->cmd[0], "env ") == 0)
 		{
 			ft_elstprint(env);

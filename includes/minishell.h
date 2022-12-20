@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/20 15:49:49 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/20 19:23:02 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ void	execute_cmd_redirect(t_cblock *tmp, t_env *env, t_msvar **mvar, int i);
 void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i);
 void	pwdfn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i);
 void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i);
-int	cd_fn(t_cblock *tmp);
+int	cd_fn(t_cblock *tmp,t_env *env);
 int	export_fn(t_cblock *tmp);
 int ft_minusn(char *str);
 

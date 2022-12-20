@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/20 16:09:31 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/20 21:38:52 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 		}
 		mvar_init(&mvar);
 		init_io(tmp, &mvar);
-		if (strcmp(tmp->cmd[0], "export ") == 0)
+		if (strcmp(tmp->cmd[0], "export") == 0)
 		{
 			export_fn(tmp);
 			tmp = tmp->next;
@@ -99,7 +99,7 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 		{
 			printf("kjkkjkjklj");
 			if (mvar->cmd_num == 1)
-				cd_fn(tmp);
+				cd_fn(tmp,env);
 			tmp = tmp->next;
 			i++;
 			continue ;
