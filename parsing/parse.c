@@ -6,11 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/12/20 13:42:29 by kpanikka         ###   ########.fr       */
-=======
-/*   Updated: 2022/12/19 19:49:39 by kpanikka         ###   ########.fr       */
->>>>>>> fde2206393df38d61fe05793cc946af384adef7b
+/*   Updated: 2022/12/20 16:24:04 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +100,6 @@ void	parse(void)
 		cbd[g_msv.i].output = ft_split(cbd[g_msv.i].output_h, 2);
 		cbd[g_msv.i].cmd = ft_split(cbd[g_msv.i].cmd_h, 2);
 		expand();
-<<<<<<< HEAD
-		printf("input : %d -- output : %d  --command : %d\n",
-			cbd[g_msv.i].input_ctr,
-			cbd[g_msv.i].output_ctr,
-			cbd[g_msv.i].cmd_ctr);
-			// int j =-1;
-=======
 	printf("input : %d -- output : %d  --command : %d\n",
 			cbd[g_msv.i].input_ctr,
 			cbd[g_msv.i].output_ctr,
