@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/20 19:51:44 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/21 00:54:41 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,33 @@ void	expand(void)
 			= ft_strjoin(parse_expand_io(g_msv.i, cbd[g_msv.i].output[ic]),"");
 }
 
+void	heredoc()
+{
+	t_cblock	*cbd;
+	char		*line;
+	char		*doc;
+	int i = 0;
+
+	cbd = g_msv.cmd_block_arr;
+	while (cbd[g_msv.i].input[i])
+	{
+		if (cbd[g_msv.i].input[i][0] == '<')
+		{
+			doc = ft_strdup(&cbd[g_msv.i].input[i][1]);
+			printf("%s ---\n", doc);
+			//exit(0);
+			line = readline("\033[1;35m> \033[0m");
+			while (ft_strncmp(doc, line, ft_strlen(line)))
+			{
+				line = readline("\033[1;35m> \033[0m");
+			}
+		}
+		i++;
+	}
+	
+	
+}
+
 void	parse(void)
 {
 	t_cblock	*cbd;
@@ -101,26 +128,10 @@ void	parse(void)
 		cbd[g_msv.i].output = ft_split(cbd[g_msv.i].output_h, 2);
 		cbd[g_msv.i].cmd = ft_split(cbd[g_msv.i].cmd_h, 2);
 		expand();
-	printf("input : %d -- output : %d  --command : %d\n",
+		heredoc();
+		printf("input : %d -- output : %d  --command : %d\n",
 			cbd[g_msv.i].input_ctr,
 			cbd[g_msv.i].output_ctr,
 			cbd[g_msv.i].cmd_ctr);
-	//		int j =-1;
-			/*while (cbd[g_msv.i].input[++j])
-			{
-				printf(" input -- %s\n",cbd[g_msv.i].input[j]);
-			}			
-			 j =-1;
-
-			while (cbd[g_msv.i].output[++j])
-			{
-				printf(" out put -- %s\n",cbd[g_msv.i].output[j]);
-			}
-						 j =-1;
-while (cbd[g_msv.i].cmd[++j])
-			{
-				printf(" cmd -- %s\n",cbd[g_msv.i].cmd[j]);
-			}*/
-			
 	}
 }
