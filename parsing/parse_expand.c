@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:02:23 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/17 13:53:15 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:15:25 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,11 @@ char	*parse_expand(int i, char *str)
 		temp = ft_strjoinchr(temp, str[j++]);
 		
 	if(str[j- 1] == '\'')
-	temp = ft_strtrim(temp,"' ");
+	temp = ft_strtrim(temp,"'");
 	else if(str[j- 1] == '"')
-	temp = ft_strtrim(temp,"\" ");
+	temp = ft_strtrim(temp,"\"");
 	//printf(" --|------ %s\n", temp);
+	temp = ft_strtrim(temp," ");
 	return (temp);
 }
 
@@ -152,11 +153,11 @@ char	*parse_expand_io(int i, char *str)
 	}
 	while (str[j])
 		temp = ft_strjoinchr(temp, str[j++]);
-		
 	if(str[j- 1] == '\'')
-	temp = ft_strtrim(temp,"' ");
+	temp = ft_strtrim(temp,"'");
 	else if(str[j- 1] == '"')
-	temp = ft_strtrim(temp,"\" ");
+	temp = ft_strtrim(temp,"\"");
+	temp = ft_strtrim(temp," ");
 	//printf("%s\n", temp);
 	return (temp);
 }
