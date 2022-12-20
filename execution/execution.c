@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/15 10:36:07 by skabeer          ###   ########.fr       */
+/*   Updated: 2022/12/19 20:50:00 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,24 @@ void	create_pipe(t_msvar **mvar)
 			i++;
 		}
 	}
+}
+
+int ft_minusn(char *str)
+{
+	int	i;
+
+	i = 0;
+	str = ft_strtrim(str, " ");
+	if(str[i++] == '-')
+	{
+		while (str[i])
+		{
+			if(str[i++] != 'n')
+				return(0);
+		}
+		return(1);
+	}
+	return(0);
 }
 
 void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)
@@ -81,11 +99,18 @@ void	pwdfn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 
 void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 {
+	int j;
+	
+	j = 1;
 	(void)env;
 	(void)mvar;
-	(void)i;
-	ft_putstr_fd(tmp->cmd[1], 1);
-	ft_putchar_fd('\n', 1);
+	i = ft_minusn(tmp->cmd[1]);
+	printf("%d\n",i);
+	while (tmp->cmd[j + i])
+		ft_putstr_fd(tmp->cmd[i+j++], 1);	
+	if(!i)
+			ft_putchar_fd('\n', 1);
+	
 	exit(1);
 }
 
