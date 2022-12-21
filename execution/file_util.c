@@ -8,7 +8,7 @@ i=0;
 
     while(process_file[i])
     {
-      printf("%s----------\n",process_file[i]);
+   //   printf("%s----------\n",process_file[i]);
      if(process_file[i][0] == '<')
 		{
                 fname = ft_substr(process_file[i],1,ft_strlen(process_file[i]));
