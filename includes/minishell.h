@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/21 13:46:24 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/21 15:47:11 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct minishellvariables
 	int f2;
 	char **cmd_path;
 	char *cmd;
+	int exit_status;
 }						t_msvar;
 
 t_msvar					g_msv;
