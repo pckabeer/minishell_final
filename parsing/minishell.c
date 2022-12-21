@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:03 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/20 19:08:24 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/21 10:29:21 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int	read_loop(void)
 			add_history(g_msv.rline);
 		else
 			clean_exit();
-		g_msv.rline = ft_strtrim(g_msv.rline, " ");
+		g_msv.temp = g_msv.rline;
+		g_msv.rline = ft_strtrim(g_msv.temp, " ");
+		free(g_msv.temp);
 		parse();
 		if (!g_msv.parse_error)
 		{
@@ -84,9 +86,6 @@ int	main(int ac, char **av, char **env)
 	signal(SIGINT, siginthandler);
 	init_minishell();
 	load_env(env);
-	// execve("/bin/ls", av, env);
-	// access("/bin/ls",X_OK); // this -1 
-	// ft_elstprint(msv.env_list);
 	read_loop();
 	return (0);
 }

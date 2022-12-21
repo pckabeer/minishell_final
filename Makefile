@@ -6,14 +6,15 @@
 #    By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 18:36:40 by kpanikka          #+#    #+#              #
-#    Updated: 2022/12/21 00:15:09 by kpanikka         ###   ########.fr        #
+#    Updated: 2022/12/21 12:29:43 by kpanikka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME	= minishell
 cc		= gcc -g
-CFLAG	= -Wall -Werror -Wextra -I includes/ -I libft/ -g
+CFLAG	= -Wall -Werror -Wextra -I includes/ -I libft/ -g 
+#-fsanitize=address
 RMFLAG  = -f
 
 

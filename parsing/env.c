@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:51:05 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/15 13:33:00 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/21 10:23:28 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	unset_env(char *key)
 					env_lst_prev = env_list->next;
 					//free(temp);
 					break ;
-				
-				
 			}
 		env_lst_prev = env_list;
 		env_list = env_list->next;

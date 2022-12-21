@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 00:13:22 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/20 19:52:03 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/21 07:57:13 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	parse_pipe_block(void)
 	}
 			g_msv.i++;
 }
-
 
 void	parse_space_block(void)
 {
