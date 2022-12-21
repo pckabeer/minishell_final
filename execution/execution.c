@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/20 23:58:08 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:32:12 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 	create_pipe(&mvar);
 	tmp = t_cmd;
 	i = 0;
-	if (!t_cmd->cmd)
+	
+	if (t_cmd->cmd == NULL)
 		return (0);
 	while (tmp)
 	{
