@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skabeer <skabeer@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 01:32:26 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/15 10:36:28 by skabeer          ###   ########.fr       */
+/*   Updated: 2022/12/21 16:07:10 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ char **env_to_str(t_env *env)
     n = count_cmd1(env);
     str = (char **)malloc(sizeof(char *) * n+1);
         if (!str)
-            perror("error:");
+           {
+			perror("error_test:");
+     g_msv.exit_status=errno;
+   clean_exit();
+		   }
 
      i = 0;
     while (i < n )

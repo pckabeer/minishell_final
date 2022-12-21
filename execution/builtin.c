@@ -55,7 +55,11 @@ int	cd_fn(t_cblock *tmp,t_env *env)
 		perror("cd error");
 	
 	if (getcwd(cwd, 1028) == NULL)
-      perror("getcwd() error");
+    {
+		perror("error_test:");
+     g_msv.exit_status=errno;
+   clean_exit();
+	}
     else
 		export_env("PWD", cwd);     //printf("current working directory is: %s\n", cwd);
 		return (0);

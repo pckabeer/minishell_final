@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/21 14:57:08 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/21 16:07:02 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,21 @@ void	create_pipe(t_msvar **mvar)
 	{
 		tmp->fd = (int **)malloc(sizeof(int *) * n);
 		if (!tmp->fd)
-			perror("error_load:");
+		{
+			perror("error_test:");
+     g_msv.exit_status=errno;
+   clean_exit();
+		}
 		i = 0;
 		while (i < n)
 		{
 			tmp->fd[i] = (int *)malloc(sizeof(int) * 2);
 			if (!tmp->fd[i])
-				perror("error_load:");
+			{
+				perror("error_test:");
+     g_msv.exit_status=errno;
+   clean_exit();
+			}
 			i++;
 		}
 	}
@@ -61,6 +69,7 @@ void	mvar_init(t_msvar **mvar)
 	(*mvar)->f1 = -1;
 	(*mvar)->f2 = -1;
 	(*mvar)->cmd_num = (*mvar)->num_pipe + 1;
+	 g_msv.exit_status=0;
 }
 
 
@@ -85,7 +94,8 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 			if (pipe(mvar->fd[i]) == -1)
 			{
 				perror("error_test:");
-				return (1);
+     g_msv.exit_status=errno;
+   clean_exit();
 			}
 		}
 		mvar_init(&mvar);
@@ -99,7 +109,7 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 		}
 		else if (strcmp(ft_strtrim(tmp->cmd[0]," "), "cd") == 0)
 		{
-			printf("kjkkjkjklj");
+			
 			if (mvar->cmd_num == 1)
 				cd_fn(tmp,env);
 			tmp = tmp->next;

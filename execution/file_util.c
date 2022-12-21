@@ -19,8 +19,9 @@ i=0;
 fd = open(process_file[i],O_RDONLY);
 if(fd == -1)
 {
-    perror("error23232:");
-    return -1;
+   perror("error_test:");
+     g_msv.exit_status=errno;
+   clean_exit();
 }
         }
 i++;
@@ -42,17 +43,18 @@ i=0;
     {
        // temp =ft_strdup(ft_strtrim(process_file[i]," "));
         if(process_file[i][0] == '>')
-		{	printf("resched");
+		{	//printf("resched");
 			fname = ft_substr(process_file[i],1,ft_strlen(process_file[i]));
            // temp++;
           // temp = ft_strchr(temp,'>');
-           printf("\nfilename-----%s",fname);
+          // printf("\nfilename-----%s",fname);
 			fd = open(fname, O_APPEND | O_RDWR);
 			if(fd ==-1)
 			fd = open(fname, O_TRUNC | O_CREAT | O_RDWR, 0000644);
 			if(fd == -1)
   			{
     			perror("error2:");
+                 g_msv.exit_status=errno;
     			return fd;
 			}
 		}
@@ -60,8 +62,10 @@ i=0;
 		fd = open(process_file[i], O_TRUNC | O_CREAT | O_RDWR, 0000644);
 if(fd == -1)
   {
-    perror("error2:");
-    return fd;
+    perror("error_test:");
+     g_msv.exit_status=errno;
+   clean_exit();
+				
 }
 i++;
 }

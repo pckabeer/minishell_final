@@ -79,8 +79,9 @@ void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)
 	{
 		ft_putstr_fd("\n", 2);
 		ft_putstr_fd(temp->cmd[0], 2);
-		perror("cmd_error:");
-		exit(0);
+		perror("error_test:");
+     g_msv.exit_status=errno;
+   clean_exit();
 	}
 }
 void print_str(char **str)

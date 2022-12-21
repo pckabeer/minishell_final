@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 19:10:45 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/20 17:48:51 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/21 16:09:47 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ void	clean_exit(void)
 {
 	free(g_msv.rline);
 	//printf("\n \033[1;34mminishell exited .... \033[0m");
-	exit(0);
+	//exit(0);
 }
