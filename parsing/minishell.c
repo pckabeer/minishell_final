@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:03 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/21 14:46:59 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/21 16:43:48 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,34 +46,23 @@ int	read_loop(void)
 	{
 		g_msv.rline = readline("\033[1;35mminishell $ \033[0m");
 		if (g_msv.rline)
+		{
+			if (ft_strlen(g_msv.rline))
 			add_history(g_msv.rline);
+		}
 		else
 			clean_exit();
 		g_msv.temp = g_msv.rline;
 		g_msv.rline = ft_strtrim(g_msv.temp, " ");
 		free(g_msv.temp);
 		parse();
-		// int jk = 0;
-		// while (g_msv.cmd_block_arr[0].input[jk])
-		// {
-		// 		printf("File buffer : %s \n",g_msv.cmd_block_arr[0].input[jk++]);
-
-		// }
-	 
 		if (!g_msv.parse_error)
-		{
-			//printf("testing");
 			execution(g_msv.cmd_block_arr, g_msv.env_list, &g_msv);
-		}
 		else
 			parse_error();
-				printf("Error no : %d \n",errno);
-
-		//ft_dlstprt(msv.block_list); /// check print
 		g_msv.temp = g_msv.rline;
 		free(g_msv.temp);
 		free(g_msv.output);
-		// linked list of command
 		init_minishell();
 	}
 }
