@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/21 12:32:12 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:33:27 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	mvar_init(t_msvar **mvar)
 
 int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 {
+	printf("11111111111");
 	t_cblock	*tmp;
 	int			i;
 
