@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 00:25:16 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/13 13:41:39 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:42:42 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,20 @@ char	*tb_join(char *str, char *output, int start, int i)
 	if (output)
 	{
 		output = ft_strjoin(output, tmp);
-		output = ft_strjoin(output, ft_substr(str, start, (i - start)));
+		g_msv.b_temp = ft_substr(str, start, (i - start));
+		g_msv.temp = output;
+		output = ft_strjoin(output, g_msv.b_temp);
+		free(g_msv.temp);
+		free(g_msv.b_temp);
 	}
 	else
-		output = ft_strdup(ft_substr(str, start, (i - start)));
+	{
+		g_msv.temp = output;
+		g_msv.b_temp = ft_substr(str, start, (i - start));
+		output = ft_strdup(g_msv.b_temp);
+		free(g_msv.temp);
+		free(g_msv.b_temp);
+	}
 	return (output);
 }
 
