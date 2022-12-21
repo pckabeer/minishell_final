@@ -3,7 +3,6 @@
 
 void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 {
-	//write(2,"12345",5);
 	int j;
 	int op;
 	
@@ -15,27 +14,19 @@ void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 	while(tmp->cmd[j])
 	{
 		if(ft_minusn(tmp->cmd[j]))
-		{
-			
 			op = 1;
-		}
 		else
 			break;
 		j++;
 
 	}
-
-	//i = ft_minusn(tmp->cmd[1]);
-	//printf("%d\n",i);
 	while (tmp->cmd[j + i])
-		{ft_putstr_fd(tmp->cmd[j++], 1);	
-	ft_putchar_fd(' ',1);
+		{
+			ft_putstr_fd(tmp->cmd[j++], 1);	
+			ft_putchar_fd(' ',1);
 		}
-
-
 	if(!op)
 			ft_putchar_fd('\n', 1);
-	
 	exit(1);
 }
 void	pwdfn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
@@ -43,34 +34,29 @@ void	pwdfn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 	(void)tmp;
 	(void)i;
 	(void)mvar;
-	printf("-------------");
 	printf("%s", ft_getenv("PWD", env));
 	exit(1);
 }
 
 int	cd_fn(t_cblock *tmp,t_env *env)
 {
-
 	char *str;
 	char *cwd;
-	cwd = (char *)malloc(sizeof(char)*1028);
 
+	cwd = (char *)malloc(sizeof(char)*1028);
 	str = NULL;
 	if((tmp->cmd[1])==NULL)
 	{
 		str = ft_getenv("HOME", env);
-	if(str == NULL)
-	{
-		printf("error");
-		return(1);
-		clean_exit();
-	}
+		if(str == NULL)
+		{
+			printf("error");
+			return(1);
+			clean_exit();
+		}
 	}
 	else
-	{
 		str=ft_strtrim(tmp->cmd[1]," ");
-	}
-	
 	if(str != NULL)
 	if (chdir(str) != 0) 
 		perror("cd error");
@@ -85,6 +71,7 @@ int	cd_fn(t_cblock *tmp,t_env *env)
 		export_env("PWD", cwd);     //printf("current working directory is: %s\n", cwd);
 		return (0);
 }
+
 int check_key_name(char *str)
 {
 	
@@ -114,11 +101,16 @@ int check_key_name(char *str)
 
 int	export_fn(t_cblock *tmp)
 {
-	char **str;
+	char *str;
+	char *key;
+	char *val;
 	int i;
+	int n;
+
 	i=1;
 	while(tmp->cmd[i])
 	{ 
+		val=NULL;
 		if(tmp->cmd[i][0] == '=')
 		{
 		
@@ -133,15 +125,21 @@ int	export_fn(t_cblock *tmp)
 		}
 		else if(ft_strchr(tmp->cmd[i],'='))
 		{
-			str=ft_split(tmp->cmd[i], '=');
-			
-			if(check_key_name(str[0]))
+			str=ft_strchr(tmp->cmd[i],'=');
+			n = ft_strlen(tmp->cmd[i])-ft_strlen(str);
+			key=ft_substr(tmp->cmd[i],0,n);
+			val=ft_substr(str,1,ft_strlen(str)-1);
+
+
+	
+			if(check_key_name(key))
 			{
-				if(str[1])
-				export_env(str[0], str[1]);
+				if(val)
+				export_env(key,val);
 				else
-				export_env(str[0], "");
+				export_env(key, "");
 			}
+
 			else
 			{
 				ft_putstr_fd ("export : ",1);
