@@ -3,16 +3,37 @@
 
 void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 {
+	//write(2,"12345",5);
 	int j;
+	int op;
 	
 	j = 1;
 	(void)env;
 	(void)mvar;
-	i = ft_minusn(tmp->cmd[1]);
-	printf("%d\n",i);
+
+	op=0;
+	while(tmp->cmd[j])
+	{
+		if(ft_minusn(tmp->cmd[j]))
+		{
+			
+			op = 1;
+		}
+		else
+			break;
+		j++;
+
+	}
+
+	//i = ft_minusn(tmp->cmd[1]);
+	//printf("%d\n",i);
 	while (tmp->cmd[j + i])
-		ft_putstr_fd(tmp->cmd[i+j++], 1);	
-	if(!i)
+		{ft_putstr_fd(tmp->cmd[j++], 1);	
+	ft_putchar_fd(' ',1);
+		}
+
+
+	if(!op)
 			ft_putchar_fd('\n', 1);
 	
 	exit(1);
@@ -64,9 +85,95 @@ int	cd_fn(t_cblock *tmp,t_env *env)
 		export_env("PWD", cwd);     //printf("current working directory is: %s\n", cwd);
 		return (0);
 }
+int check_key_name(char *str)
+{
+	
+	int i;
+	i=0;
+	if((str[i] >= 'a' && str[i] <='z') || (str[i] >= 'A' && str[i] <='Z') || str[i] == '_')
+	{i++;
+		while(str[i])
+		{
+			if((str[i] >= 'a' && str[i] <='z') || (str[i] >= 'A' && str[i] <='Z') || str[i] == '_' || (str[i] >= '0' && str[i] <='9'))
+			i++;
+			else
+			{
+					
+			return(0);
+			}
+		}
+		return(1);
+
+	}
+	else
+	{
+		
+	return(0);
+	}
+}
 
 int	export_fn(t_cblock *tmp)
 {
-	export_env(ft_strtrim(tmp->cmd[1], " "), ft_strtrim(tmp->cmd[2], " "));
+	char **str;
+	int i;
+	i=1;
+	while(tmp->cmd[i])
+	{ 
+		if(tmp->cmd[i][0] == '=')
+		{
+		
+				ft_putstr_fd ("export : ",1);
+				ft_putchar_fd('`',1);
+				ft_putstr_fd (tmp->cmd[i],1);
+				ft_putchar_fd('\'',1);
+				ft_putstr_fd (": not a valid identifier\n",1);
+			
+		i++;
+		continue;
+		}
+		else if(ft_strchr(tmp->cmd[i],'='))
+		{
+			str=ft_split(tmp->cmd[i], '=');
+			
+			if(check_key_name(str[0]))
+			{
+				if(str[1])
+				export_env(str[0], str[1]);
+				else
+				export_env(str[0], "");
+			}
+			else
+			{
+				ft_putstr_fd ("export : ",1);
+				ft_putchar_fd('`',1);
+				ft_putstr_fd (tmp->cmd[i],1);
+				ft_putchar_fd('\'',1);
+				ft_putstr_fd (": not a valid identifier\n",1);
+			}
+			i++;
+		}
+
+		else
+		{
+			if(!check_key_name(tmp->cmd[i]))
+			{
+				ft_putstr_fd ("export : ",1);
+				ft_putchar_fd('`',1);
+				ft_putstr_fd (tmp->cmd[i],1);
+				ft_putchar_fd('\'',1);
+				ft_putstr_fd (": not a valid identifier\n",1);
+			}
+
+			
+
+			
+i++;
+		}
+		
+		
+
+	}
+
+		//export_env(ft_strtrim(tmp->cmd[1], " "), ft_strtrim(tmp->cmd[2], " "));
 	return (1);
 }
