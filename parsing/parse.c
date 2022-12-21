@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/21 13:37:40 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:23:20 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	heredoc()
 	{
 		if (cbd[g_msv.i].input[i][0] == '<')
 		{
-			lsthd = i;
+			lsthd = i+1;
 			doc = ft_strdup(&cbd[g_msv.i].input[i][1]);
 			printf("%s ---\n", doc);
 			//exit(0);
@@ -110,10 +110,17 @@ void	heredoc()
 		i++;
 	}
 	//read(hfd[0],fbuff,1024);
-	fbuff = ft_itoa(hfd[0]);
+	fbuff = ft_itoa(hfd[0]);	 
+	printf("hfd  : %d \n",lsthd);
+
 	if(lsthd)
+	{
+		lsthd--;
 	cbd[g_msv.i].input[lsthd] = ft_strjoin("<",fbuff);
-	/*//printf("File buffer : %s \n",fbuff);*/
+	 printf("File buffer : %s \n",cbd[g_msv.i].input[lsthd]);
+
+	}
+	
 }
 
 void	parse(void)
