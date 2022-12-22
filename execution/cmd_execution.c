@@ -9,7 +9,12 @@ void	execute_cmd_start(t_cblock *t_cmd, t_env *env, t_msvar **mvar, int k)
 
 	i = k;
 	tmp = *mvar;
+	env = g_msv.env_list;
+
+	
 	tmp->cmd_path = ft_split(ft_getenv("PATH", env), ':');
+
+	
 	n = tmp->cmd_num;
 	tmp->pid = fork();
 	if (tmp->pid == 0)
@@ -42,7 +47,7 @@ void	execute_cmd_redirect(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 		}
 		else if (strcmp(tmp->cmd[0], "pwd") == 0)
 			pwdfn(tmp, env, mvar, i);		
-		else if (strcmp(tmp->cmd[0], "env ") == 0)
+		else if (strcmp(tmp->cmd[0], "env") == 0)
 		{
 			ft_elstprint(env);
 			exit(1);
@@ -64,10 +69,16 @@ void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)
 	(void) i;
 	(void)*env;
 	tmp = *mvar;
+	if(temp->cmd[0][0]=='.')
+	{
+		tmp->cmd=temp->cmd[0];
+	}
+	else
 	tmp->cmd = get_cmd(mvar, temp->cmd[0]);
+	
 	if (!tmp->cmd)
 	{
-		if (ft_strrchr(temp->cmd[0], '/'))
+		if (ft_strrchr(temp->cmd[0], '/') )
 			ft_putstr_fd(" : No such file or directory\n", 2);
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/21 23:14:09 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/22 13:19:14 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,8 @@ int	cd_fn(t_cblock *tmp,t_env *env);
 int	export_fn(t_cblock *tmp);
 int ft_minusn(char *str);
 int	ft_elstprint_exp(t_env *lst);
+void	unset_fn(t_cblock *tmp);
+void	unset_env(char *key);
 
 
 

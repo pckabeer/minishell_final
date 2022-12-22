@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:51:05 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/21 23:12:07 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:04:44 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,14 @@ void	unset_env(char *key)
 	//*env_lst_prev = NULL;
 	while (env_list)
 	{
-		if (ft_strncmp(key, env_list->key, 32767) == 0)
-			{
+		if (ft_strncmp(key, env_list->next->key, 32767) == 0)
+			{printf(" I reached");
+			printf("%s",env_list->key);
 					//temp = env_list ;
-					env_lst_prev = env_list->next;
-					//free(temp);
+					env_list->next=env_list->next->next;
+				//	env_lst_prev = env_list->next;
+					
+					//free(temp);.
 					break ;
 			}
 		env_lst_prev = env_list;
@@ -94,9 +97,15 @@ void	export_env(char *key, char *value)
 */
 char	*ft_getenv(char *str, t_env *env_list)
 {
+
+
+	//ft_elstprint(g_msv.env_list);
+	
+	env_list = g_msv.env_list;
+	
 	while (env_list)
 	{
-		if (ft_strncmp(str, env_list->key, 32767) == 0)
+		if (ft_strncmp(str, ft_strtrim(env_list->key," "), 32767) == 0)
 			return (env_list->value);
 		env_list = env_list->next;
 	}

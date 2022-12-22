@@ -29,6 +29,7 @@ void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 			ft_putchar_fd('\n', 1);
 	exit(1);
 }
+
 void	pwdfn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 {
 	(void)tmp;
@@ -174,4 +175,10 @@ i++;
 
 		//export_env(ft_strtrim(tmp->cmd[1], " "), ft_strtrim(tmp->cmd[2], " "));
 	return (1);
+}
+
+void unset_fn(t_cblock *tmp)
+{
+	if(tmp->cmd[1])
+		unset_env(tmp->cmd[1]);
 }

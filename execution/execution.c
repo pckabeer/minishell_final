@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/21 23:07:09 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:05:28 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 	t_cblock	*tmp;
 	int			i;
 
+
+//t_elstprint(g_msv.env_list);
+
 	(void)env;
 	mvar_init(&mvar);
 	create_pipe(&mvar);
@@ -115,9 +118,9 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 			i++;
 			continue ;
 		}
-		else if(strcmp(tmp->cmd[0], "unset ") == 0)
+		else if(strcmp(tmp->cmd[0], "unset") == 0)
 		{
-			//unset_env(char *key);
+			unset_fn(tmp);
 			tmp = tmp->next;
 			i++;
 			continue ;
@@ -125,6 +128,8 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 
 	//	print_str(tmp->cmd);
 		//print_str(tmp->output);
+
+		
 		execute_cmd_start(tmp, env, &mvar, i);
 
 

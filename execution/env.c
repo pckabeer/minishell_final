@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 01:32:26 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/21 16:07:10 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/22 18:29:12 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char **env_to_str(t_env *env)
 env=env->next;
         i++;
     }
-	str[i]=NULL;
+	str[i]=(char *)0;
 
 return(str);
 }
