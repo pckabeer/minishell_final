@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:02:23 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/22 11:40:42 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/22 21:47:03 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ char	*seq_dq(char *temp, char *str, int *j, int *k)
 			if (str[*j] == '$')
 			{
 				(*j)++;
+				if (str[*j] == '?')
+				{
+					temp = ft_strjoin(temp, ft_itoa(g_msv.exit_status));
+					(*j)++;
+				}
 				while (str[*j] && str[*j] != '"' && str[*j] != ' ' && str[*j] != '$')
 				{
 					if (!ft_isalnum(str[*j]))
@@ -75,7 +80,11 @@ char	*parse_expand(int i, char *str)
 	temp = seq_dq(temp, str, &j, &k);
 	if (str[j] == '$')
 	{
-		j++;
+		if (str[++j] == '?')
+		{
+			temp = ft_strjoin(temp, ft_itoa(g_msv.exit_status));
+			j++;
+		}
 		while (str[j] && str[j] != '"' && str[j] != ' ' && str[j] != '$' )
 		{
 			k++;
@@ -120,6 +129,11 @@ char	*parse_expand_io(int i, char *str)
 	if (str[j] == '$')
 	{
 		j++;
+		if (str[j] == '?')
+		{
+			temp = ft_strjoin(temp, ft_itoa(g_msv.exit_status));
+			j++;
+		}
 		while (str[j] && str[j] != '"' && str[j] != ' ' && str[j] != '$')
 		{
 			k++;

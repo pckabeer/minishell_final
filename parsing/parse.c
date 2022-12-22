@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/22 16:57:14 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/22 20:31:46 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,36 +104,29 @@ void	heredoc()
 				if(line && g_msv.in_heredoc)
 				{
 					if (!ft_strncmp(doc, line, ft_strlen(line) + 1))
-					break ;
+						break ;
 					ft_putendl_fd(line, hfd[1]);
 				}
-				else 
+				else
 				{
 					lsthd = 0;
 					close(hfd[1]);
-					//exit(0);
-					// break;
 										g_msv.in_heredoc = 1;
 
 					return ;
 				}
-					// clean_exit();
 			}
 		}
-	if(!g_msv.in_heredoc)
-	{
-					g_msv.in_heredoc = 1;
-
-	break;
-	}
-
 	}
 	if(lsthd--)
 	{
-		printf("test ----");
+							g_msv.in_heredoc = 0;
+
 		fbuff = ft_itoa(hfd[0]);
 		close(hfd[1]);
 		cbd[g_msv.i].input[lsthd] = ft_strjoin("<", fbuff);
+		printf("test ----%s",cbd[g_msv.i].input[lsthd]);
+
 	}
 }
 
