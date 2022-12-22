@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:02:23 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/21 10:22:14 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:40:42 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*parse_expand(int i, char *str)
 
 	temp = "";
 	if (g_msv.parse_error)
-		return(NULL);
+		return (NULL);
 	j = 0;
 	k = 0;
 	i = 0;
@@ -76,20 +76,20 @@ char	*parse_expand(int i, char *str)
 	if (str[j] == '$')
 	{
 		j++;
-		while (str[j] && str[j] != '"' && str[j] != ' ' && str[j] != '$')
+		while (str[j] && str[j] != '"' && str[j] != ' ' && str[j] != '$' )
 		{
 			k++;
 			j++;
 		}
 		if (k)
 		{
-			g_msv.b_temp = ft_get_dword(str + j - k);
+			g_msv.b_temp = ft_get_dword_(str + j - k);
 			g_msv.b_temp = ft_getenv(g_msv.b_temp, g_msv.env_list);
 			if (g_msv.b_temp)
 				temp = ft_strjoin(temp, g_msv.b_temp);
 		}
-		else
-			temp = ft_strjoinchr(temp, '$');
+		// else
+		// 	temp = ft_strjoinchr(temp, '$');
 		k = 0;
 	}
 	temp = trim_seq(temp, str, j);

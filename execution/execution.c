@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/21 23:07:09 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/22 18:37:33 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	create_pipe(t_msvar **mvar)
 		if (!tmp->fd)
 		{
 			perror("error_test:");
-     g_msv.exit_status=errno;
-   clean_exit();
+			g_msv.exit_status=errno;
+			clean_exit();
 		}
 		i = 0;
 		while (i < n)
