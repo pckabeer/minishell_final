@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/22 13:19:14 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/22 18:44:47 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include "../libft/libft.h"
 # include <dirent.h>
+# include <stdio.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-# include <stdio.h>
+#include <stdbool.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
@@ -100,17 +101,15 @@ typedef struct minishellvariables
 	char				*b_temp;
 	char				delimit;
 	t_cblock			*cmd_block_arr;
-	
-	int pid;
-
-
-	
-	int **fd;
-	int f1;
+	int					pid;
+	int 				**fd;
+	int 				f1;
 	int f2;
 	char **cmd_path;
 	char *cmd;
 	int exit_status;
+	int in_heredoc;
+	int in_proc_active;
 }						t_msvar;
 
 t_msvar					g_msv;
@@ -152,6 +151,7 @@ int						ft_elstprint(t_env *lst);
 
 char					*ft_get_word(char *str, char ch);
 char					*ft_get_dword(char *str);
+char					*ft_get_dword_(char *str);
 
 void					ft_exec_pwd(t_msvar *lst);
 void					ft_exec_env(t_msvar *lst);
@@ -211,9 +211,6 @@ int ft_minusn(char *str);
 int	ft_elstprint_exp(t_env *lst);
 void	unset_fn(t_cblock *tmp);
 void	unset_env(char *key);
-
-
-
 
 /******temp_util**************/
 

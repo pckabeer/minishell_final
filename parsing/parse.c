@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/21 14:46:44 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:57:14 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,50 +82,59 @@ void	heredoc()
 	t_cblock	*cbd;
 	char		*line;
 	char		*doc;
-	int i = 0;
+	int i = -1;
 	int hfd[2];
 	int lsthd = 0;
 	char *fbuff = calloc(1024,1);
-			pipe(hfd);
+	pipe(hfd);
 
 	cbd = g_msv.cmd_block_arr;
-	while (cbd[g_msv.i].input[i])
+	while (cbd[g_msv.i].input[++i])
 	{
 		if (cbd[g_msv.i].input[i][0] == '<')
 		{
-			lsthd = i+1;
+			g_msv.in_heredoc = 1;
+			lsthd = i + 1;
 			doc = ft_strdup(&cbd[g_msv.i].input[i][1]);
-			//printf("%s ---\n", doc);
-			//exit(0);
 			close(hfd[0]);
 			pipe(hfd);
-			// line = readline("\033[1;35m> \033[0m");
 			while (1)
 			{
-				
 				line = readline("\033[1;35m> \033[0m");
-				if(!ft_strncmp(doc, line, ft_strlen(line) + 1))
-				break;
-				// write(hfd[1], line, strlen(line));
-				ft_putendl_fd(line,hfd[1]);
+				if(line && g_msv.in_heredoc)
+				{
+					if (!ft_strncmp(doc, line, ft_strlen(line) + 1))
+					break ;
+					ft_putendl_fd(line, hfd[1]);
+				}
+				else 
+				{
+					lsthd = 0;
+					close(hfd[1]);
+					//exit(0);
+					// break;
+										g_msv.in_heredoc = 1;
+
+					return ;
+				}
+					// clean_exit();
 			}
 		}
-		//close(hfd[1]);
-		i++;
-	}
-	//read(hfd[0],fbuff,1024);
-	fbuff = ft_itoa(hfd[0]);	 
-	// printf("hfd  : %d \n",lsthd);
-
-	if(lsthd)
+	if(!g_msv.in_heredoc)
 	{
-		lsthd--;
-		close(hfd[1]);
-	cbd[g_msv.i].input[lsthd] = ft_strjoin("<",fbuff);
-	//  printf("File buffer : %s \n",cbd[g_msv.i].input[lsthd]);
+					g_msv.in_heredoc = 1;
+
+	break;
+	}
 
 	}
-	
+	if(lsthd--)
+	{
+		printf("test ----");
+		fbuff = ft_itoa(hfd[0]);
+		close(hfd[1]);
+		cbd[g_msv.i].input[lsthd] = ft_strjoin("<", fbuff);
+	}
 }
 
 void	parse(void)
@@ -153,6 +162,8 @@ void	parse(void)
 		cbd[g_msv.i].cmd = ft_split(cbd[g_msv.i].cmd_h, 2);
 		expand();
 		heredoc();
+		if (g_msv.in_heredoc)
+			break ;
 		printf("input : %d -- output : %d  --command : %d\n",
 			cbd[g_msv.i].input_ctr,
 			cbd[g_msv.i].output_ctr,

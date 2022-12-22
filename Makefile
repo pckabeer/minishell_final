@@ -6,15 +6,18 @@
 #    By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 18:36:40 by kpanikka          #+#    #+#              #
-#    Updated: 2022/12/21 12:29:43 by kpanikka         ###   ########.fr        #
+#    Updated: 2022/12/22 09:10:53 by kpanikka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME	= minishell
 cc		= gcc -g
-CFLAG	= -Wall -Werror -Wextra -I includes/ -I libft/ -g 
+CFLAG	= -Wall -Werror -Wextra  -g 
 #-fsanitize=address
+RDLINE_L = -L /usr/local/opt/readline/lib -lreadline
+RDLINE_I = -I /usr/local/opt/readline/include
+
 RMFLAG  = -f
 
 
@@ -38,7 +41,7 @@ all		: $(NAME)
 bonus	: all
  
 %.o : %.c
-	$(CC) $(CFLAG) -c $< -o $@
+	$(CC) $(CFLAG) $(RDLINE_I)  -I includes/ -I libft/ -c $< -o $@
 
 clean	:
 		@make clean -C libft/
@@ -57,7 +60,7 @@ $(NAME) : $(OBJS)
 		@echo "Compiling minishell...\n"
 		@echo "*************************\n"
 
-		@$(cc) $(CFLAG) $(OBJS) -o  $(NAME) $(LIBFT) -lreadline 
+		@$(cc) $(CFLAG) $(OBJS) -o    $(NAME) $(LIBFT)  $(RDLINE_L) 
 		@echo "\n\033[0mDone !"
 
 .PHONY : all clean fclean re

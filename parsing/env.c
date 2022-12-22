@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:51:05 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/22 16:04:44 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/22 18:47:00 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,17 @@ void	export_env(char *key, char *value)
 		while (env_list)
 		{
 			if (ft_strncmp(key, env_list->key, 32767) == 0)
-				{
-					temp = env_list->value ;
-					env_list->value = value;
-					free(temp);
-					break ;
-				}
+			{
+				temp = env_list->value ;
+				env_list->value = value;
+				free(temp);
+				break ;
+			}
 			env_list = env_list->next;
 		}
 	}
 	else
 	{
-		
 		env_lst = ft_elstnew(key, value);
 		if (env_lst)
 			ft_elstadd_back(&g_msv.env_list, env_lst);

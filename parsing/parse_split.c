@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 00:25:16 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/21 12:42:42 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/22 02:04:09 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	tblock_counter(t_cblock *tcb, char *str)
 			i = parse_split_lt(tcb, i, start, str);
 		else if (str[i] == '>')
 			i = parse_split_gt(tcb, i, start, str);
+		 else if (str[i] == '$' && (str[i+1] == '"' || str[i+1] == '\'') )
+		 	str[i] = ' ';
 		else if (str[i] == '\'')
 			i = parse_split_qh(tcb, i, start, str);
 		else if (str[i] == '"')
