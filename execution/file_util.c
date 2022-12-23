@@ -19,7 +19,7 @@ i=0;
 fd = open(process_file[i],O_RDONLY);
 if(fd == -1)
 {
-   perror("error_test:");
+   perror(process_file[i]);
      g_msv.exit_status=errno;
   /// clean_exit();
 }
@@ -62,7 +62,7 @@ i=0;
 		fd = open(process_file[i], O_TRUNC | O_CREAT | O_RDWR, 0000644);
 if(fd == -1)
   {
-    perror("error_test:");
+    perror(process_file[i]);
      g_msv.exit_status=errno;
  //  clean_exit();
 				

@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/23 17:10:03 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 18:53:02 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	mvar_init(t_msvar **mvar)
 }
 
 
-int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
+void	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 {
 	t_cblock	*tmp;
 	int			i;
@@ -90,8 +90,8 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 	tmp = t_cmd;
 	i = 0;
 	
-	if (t_cmd->cmd == NULL)
-		return (0);
+	if (mvar->cmd_num == 0)
+		return ;
 	while (tmp)
 	{
 		if (mvar->cmd_num > 1)
@@ -100,11 +100,18 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 			{
 				perror("error_test:");
      g_msv.exit_status=errno;
-   clean_exit();
+  return ;
 			}
 		}
 		mvar_init(&mvar);
-		init_io(tmp, &mvar);
+		if(!init_io(tmp, &mvar))
+		{
+			g_msv.exit_status=errno;
+			return;
+		}
+
+		if (mvar->cmd_num > 1)
+		{
 		if ((strcmp(tmp->cmd[0], "export") == 0) && tmp->cmd[1])
 		{
 			export_fn(tmp);
@@ -134,7 +141,7 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 
 		
 		execute_cmd_start(tmp, env, &mvar, i);
-
+		}
 
 	if (mvar->cmd_num > 1)
 		{
@@ -155,7 +162,7 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 	while (waitpid(-1, &(status), 0) > 0)
 			;
 		g_msv.exit_status=WEXITSTATUS(status);
-	return (0);
+	return ;
 }
 
 
