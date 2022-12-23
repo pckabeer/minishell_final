@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/23 21:40:19 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 22:19:00 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,18 @@ int	init_io(t_cblock *t_cmd, t_msvar **mvar)
 	t_msvar	*tmp;
 
 	tmp = *mvar;
-	if (t_cmd->input)
-	{
-		tmp->f1 = check_input(t_cmd->input);
-		if (tmp->f1 == -1)
-			return (0);
-	}
+	
 	if (t_cmd->output)
 	{
 		tmp->f2 = check_output(t_cmd->output);
 		if (tmp->f2 == -1)
+			return (0);
+	}
+
+	if (t_cmd->input)
+	{
+		tmp->f1 = check_input(t_cmd->input);
+		if (tmp->f1 == -1)
 			return (0);
 	}
 	return (1);
@@ -134,6 +136,10 @@ void	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 			tmp = tmp->next;
 			i++;
 			continue ;
+		}
+		else if(strcmp(tmp->cmd[0], "exit") == 0)
+		{
+			exit(0);
 		}
 
 	//	print_str(tmp->cmd);

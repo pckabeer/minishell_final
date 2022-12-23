@@ -42,7 +42,7 @@ void	pwdfn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 	(void)tmp;
 	(void)i;
 	(void)mvar;
-	printf("%s", ft_getenv("PWD", env));
+	printf("%s\n", ft_getenv("PWD", env));
 	exit(1);
 }
 
