@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 16:29:56 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/21 20:54:51 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:31:41 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*ft_get_dword(char *str)
 		i++;
 	return (ft_substr(str, 0, i));
 }
+
 char	*ft_get_dword_(char *str)
 {
 	int	i;
@@ -45,5 +46,8 @@ char	*ft_strjoinchr(char *str, char ch)
 
 	temp_two = ft_calloc(2, 1);
 	temp_two[0] = ch;
-	return (ft_strjoin(str, temp_two));
+	temp_two[1] = '\0';
+	g_msv.temp = ft_strjoin(str, temp_two);
+	free(temp_two);
+	return (g_msv.temp);
 }
