@@ -184,8 +184,13 @@ i++;
 	return (1);
 }
 
-void unset_fn(t_cblock *tmp)
+void unset_fn(t_cblock *tmp,t_env *env)
 {
-	if(tmp->cmd[1])
+	
+	if(tmp->cmd[1] && ft_getenv(tmp->cmd[1],env))
+		{
 		unset_env(tmp->cmd[1]);
+		}
+		
+		return ;
 }

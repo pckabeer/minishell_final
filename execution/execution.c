@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/23 22:19:00 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:16:46 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,8 @@ void	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 		}
 		else if(strcmp(tmp->cmd[0], "unset") == 0)
 		{
-			unset_fn(tmp);
+			
+			unset_fn(tmp,env);
 			tmp = tmp->next;
 			i++;
 			continue ;

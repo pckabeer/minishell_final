@@ -35,26 +35,35 @@ t_msvar *temp;
 temp  = *mvar;
 	i = 0;
     cmd=ft_strtrim(cmd," ");
-  //  printf("\n-------Command---------%s------",cmd);
+  
+
+ if (cmd[0] == '/')
+ {
+        tmp =  ft_strdup(cmd);
+		if (access(tmp, X_OK) == 0)
+			return (tmp);     
+       free(tmp);
+
+ }
+        else
+        {
+		if(temp->cmd_path)
+{
 	while (temp->cmd_path[i])
 	{
 		temp->temp = NULL;
-        if (cmd[0] == '/')
-        tmp =  ft_strdup(cmd);
-        else
-        {
+       
         tmp = ft_strjoin(temp->cmd_path[i], "/");
         temp->temp = tmp;
         tmp = ft_strjoin(tmp, cmd);
-        }
-//printf("\n----Command with full path--%s-----\n",tmp);
         if (temp->temp)
 			free(temp->temp);
 		if (access(tmp, X_OK) == 0)
 			return (tmp);     
        free(tmp);
 		i++;
-    }    
-	
+    }  
+}  
+		}
 	return (NULL);
 }

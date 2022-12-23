@@ -79,7 +79,6 @@ void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)
 	}
 	else
 	tmp->cmd = get_cmd(mvar, temp->cmd[0]);
-	
 	if (!tmp->cmd)
 	{
 	//perror("test");
@@ -113,10 +112,14 @@ void print_str(char **str)
 {
     int i;
     i=0;
-    printf("\n----------------------\n");
+   // printf("\n----------------------\n");
+   if(str)
+   {
     while(str[i])
     {
-        printf("*****%s*****\n",str[i++]);
+		ft_putendl_fd(str[i++],2);
+		
 
     }
+   }
 }

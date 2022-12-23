@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:51:05 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/22 18:47:00 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:17:28 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ void	unset_env(char *key)
 	while (env_list)
 	{
 		if (ft_strncmp(key, env_list->next->key, 32767) == 0)
-			{printf(" I reached");
-			printf("%s",env_list->key);
+			{
 					//temp = env_list ;
 					env_list->next=env_list->next->next;
 				//	env_lst_prev = env_list->next;
