@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/23 18:53:02 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:17:31 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ void	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 	tmp = t_cmd;
 	i = 0;
 	
-	if (mvar->cmd_num == 0)
-		return ;
+	
 	while (tmp)
 	{
 		if (mvar->cmd_num > 1)
@@ -109,8 +108,9 @@ void	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 			g_msv.exit_status=errno;
 			return;
 		}
-
-		if (mvar->cmd_num > 1)
+if (!t_cmd->cmd[0])
+		return ;
+		if (mvar->cmd_num >= 1)
 		{
 		if ((strcmp(tmp->cmd[0], "export") == 0) && tmp->cmd[1])
 		{
