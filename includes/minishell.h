@@ -6,27 +6,25 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/23 18:48:09 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:04:22 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "../libft/libft.h"
 # include <dirent.h>
 # include <stdio.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 # include <signal.h>
-#include <stdbool.h>
+# include <stdbool.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/errno.h>
 # include <unistd.h>
- #include <sys/errno.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 # define DELIMIT 2
-#include<fcntl.h>
-
+# include <fcntl.h>
 
 typedef struct s_env
 {
@@ -102,14 +100,14 @@ typedef struct minishellvariables
 	char				delimit;
 	t_cblock			*cmd_block_arr;
 	int					pid;
-	int 				**fd;
-	int 				f1;
-	int f2;
-	char **cmd_path;
-	char *cmd;
-	int exit_status;
-	int in_heredoc;
-	int in_proc_active;
+	int					**fd;
+	int					f1;
+	int					f2;
+	char				**cmd_path;
+	char				*cmd;
+	int					exit_status;
+	int					in_heredoc;
+	int					in_proc_active;
 }						t_msvar;
 
 t_msvar					g_msv;
@@ -185,34 +183,40 @@ int						ls(t_msvar *lst);
 //***********export.c****************//
 void					ft_exec_export(t_msvar *lst);
 
-
 //***************Execution**************//
-int count_cmd(t_cblock *t_cmd);
-void execution(t_cblock *t_cmd, t_env *env,t_msvar *mvar);
-char	*ft_strjoin(char const *s1, char const *s2);
-int check_input(char **process_file);
-int check_output(char **process_file);
+int						count_cmd(t_cblock *t_cmd);
+int						execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar);
+char					*ft_strjoin(char const *s1, char const *s2);
+int						check_input(char **process_file);
+int						check_output(char **process_file);
 
-t_env	*load_env1(char **env);
-char **env_to_str(t_env *env);
+t_env					*load_env1(char **env);
+char					**env_to_str(t_env *env);
 
-char	*get_cmd(t_msvar **mvar, char *cmd);
-void	export_env(char *key, char *value);
-void	unset_env(char *key);
+char					*get_cmd(t_msvar **mvar, char *cmd);
+void					export_env(char *key, char *value);
+void					unset_env(char *key);
 
-void	execute_cmd_start(t_cblock *t_cmd, t_env *env, t_msvar **mvar, int k);
-void	execute_cmd_redirect(t_cblock *tmp, t_env *env, t_msvar **mvar, int i);
-void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i);
-void	pwdfn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i);
-void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i);
-int	cd_fn(t_cblock *tmp,t_env *env);
-int	export_fn(t_cblock *tmp);
-int ft_minusn(char *str);
-int	ft_elstprint_exp(t_env *lst);
-void	unset_fn(t_cblock *tmp);
-void	unset_env(char *key);
+void					execute_cmd_start(t_cblock *t_cmd, t_env *env,
+							t_msvar **mvar, int k);
+void					execute_cmd_redirect(t_cblock *tmp, t_env *env,
+							t_msvar **mvar, int i);
+void					execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar,
+							int i);
+void					pwdfn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i);
+void					echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar,
+							int i);
+int						cd_fn(t_cblock *tmp, t_env *env);
+int						export_fn(t_cblock *tmp);
+int						ft_minusn(char *str);
+int						ft_elstprint_exp(t_env *lst);
+void					unset_fn(t_cblock *tmp);
+void					unset_env(char *key);
+
+void					siginthandler1(int sig_num);
+void					siginthandler(int sig_num);
 
 /******temp_util**************/
 
-void print_str(char **str);
+void					print_str(char **str);
 #endif

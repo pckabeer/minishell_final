@@ -25,7 +25,7 @@ echo "test1 test2"
 
 echo "test1  test2" test3
 
-echo " test1 test2 " 'test3'	#error
+echo " test1 test2 " 'test3'	
 
 echo test1		test2
 

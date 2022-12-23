@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:02:23 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/22 21:47:03 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 12:38:18 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*seq_dq(char *temp, char *str, int *j, int *k)
 				(*j)++;
 				if (str[*j] == '?')
 				{
+					printf("error: %d not allowed in double quotes\n",g_msv.exit_status);
 					temp = ft_strjoin(temp, ft_itoa(g_msv.exit_status));
 					(*j)++;
 				}
@@ -57,11 +58,11 @@ char	*trim_seq(char *temp, char *str, int j)
 {
 	while (str[j])
 		temp = ft_strjoinchr(temp, str[j++]);
+	temp = ft_strtrim(temp, " ");
 	if (str[j- 1] == '\'')
 		temp = ft_strtrim(temp, "'");
 	else if (str[j- 1] == '"')
 		temp = ft_strtrim(temp, "\"");
-	temp = ft_strtrim(temp, " ");
 	return (temp);
 }
 

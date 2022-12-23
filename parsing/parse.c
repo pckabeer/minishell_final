@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/22 20:31:46 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 18:55:49 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,16 @@ void	expand(void)
 	cbd = g_msv.cmd_block_arr;
 	ic = -1;
 	while (cbd[g_msv.i].cmd[++ic])
-		cbd[g_msv.i].cmd[ic] = ft_strjoinchr(parse_expand(g_msv.i, cbd[g_msv.i].cmd[ic]),'\0');
+		cbd[g_msv.i].cmd[ic] \
+			= ft_strjoinchr(parse_expand(g_msv.i, cbd[g_msv.i].cmd[ic]), '\0');
 	ic = -1;
 	while (cbd[g_msv.i].input[++ic])
 		cbd[g_msv.i].input[ic] \
-			= ft_strjoin(parse_expand_io(g_msv.i, cbd[g_msv.i].input[ic]),"");
+			= ft_strjoin(parse_expand_io(g_msv.i, cbd[g_msv.i].input[ic]), "");
 	ic = -1;
 	while (cbd[g_msv.i].output[++ic])
 		cbd[g_msv.i].output[ic] \
-			= ft_strjoin(parse_expand_io(g_msv.i, cbd[g_msv.i].output[ic]),"");
+			= ft_strjoin(parse_expand_io(g_msv.i, cbd[g_msv.i].output[ic]), "");
 }
 
 void	heredoc()
@@ -100,15 +101,22 @@ void	heredoc()
 			pipe(hfd);
 			while (1)
 			{
+															write(1, "QPCK: 8\n", 9);
+
 				line = readline("\033[1;35m> \033[0m");
+											// write(1, "QPCK: 7\n", 9);
 				if(line && g_msv.in_heredoc)
-				{
+				{							
+					// write(1, "QPCK: 6\n", 9);
+
 					if (!ft_strncmp(doc, line, ft_strlen(line) + 1))
 						break ;
 					ft_putendl_fd(line, hfd[1]);
 				}
 				else
 				{
+							// write(1, "QPCK: 4\n", 9);
+
 					lsthd = 0;
 					close(hfd[1]);
 										g_msv.in_heredoc = 1;
@@ -157,9 +165,9 @@ void	parse(void)
 		heredoc();
 		if (g_msv.in_heredoc)
 			break ;
-		printf("input : %d -- output : %d  --command : %d\n",
-			cbd[g_msv.i].input_ctr,
-			cbd[g_msv.i].output_ctr,
-			cbd[g_msv.i].cmd_ctr);
+		// printf("input : %d -- output : %d  --command : %d\n",
+		// 	cbd[g_msv.i].input_ctr,
+		// 	cbd[g_msv.i].output_ctr,
+		// 	cbd[g_msv.i].cmd_ctr);
 	}
 }
