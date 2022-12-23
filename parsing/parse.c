@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/23 18:55:49 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 21:57:46 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	heredoc()
 			pipe(hfd);
 			while (1)
 			{
-															write(1, "QPCK: 8\n", 9);
+															// write(1, "QPCK: 8\n", 9);
 
 				line = readline("\033[1;35m> \033[0m");
 											// write(1, "QPCK: 7\n", 9);
@@ -133,7 +133,7 @@ void	heredoc()
 		fbuff = ft_itoa(hfd[0]);
 		close(hfd[1]);
 		cbd[g_msv.i].input[lsthd] = ft_strjoin("<", fbuff);
-		printf("test ----%s",cbd[g_msv.i].input[lsthd]);
+		// printf("test ----%s",cbd[g_msv.i].input[lsthd]);
 
 	}
 }
@@ -145,6 +145,7 @@ void	parse(void)
 	if (g_msv.parse_error)
 		return ;
 	parse_count_pipe();
+
 	g_msv.cmd_arr = ft_split(g_msv.rline, 2);
 	g_msv.i = -1;
 	g_msv.cmd_block_arr = calloc(sizeof(t_cblock), g_msv.num_pipe + 1);

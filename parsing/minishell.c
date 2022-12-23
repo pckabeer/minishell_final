@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:03 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/23 18:43:29 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 20:51:32 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,14 @@ void	read_loop_helper(void)
 	if (flag)
 	{
 		g_msv.rline = readline("\033[1;35mminishell $ \033[0m");
+							// write(1, "Quit: 3333\n", 9);
 		flag = false;
 	}
 	if (g_msv.rline)
 	{
+		if (!ft_strlen(ft_strtrim(g_msv.rline, " ")))
+			g_msv.parse_error = 121;
+
 		if (ft_strlen(g_msv.rline))
 			add_history(g_msv.rline);
 	}
@@ -69,6 +73,8 @@ int	read_loop(void)
 	while (1)
 	{
 		read_loop_helper();
+		// continue ;
+
 		parse();
 		if (!g_msv.in_heredoc)
 		{

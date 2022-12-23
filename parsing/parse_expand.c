@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:02:23 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/23 12:38:18 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 21:45:09 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*seq_dq(char *temp, char *str, int *j, int *k)
 {
 	if (str[*j] == '"')
 	{
-		temp = ft_strjoinchr(temp, '\"');
+		//temp = ft_strjoinchr(temp, '\"');
 		(*j)++;
 		while (str[*j] && str[*j] != '"')
 		{
@@ -78,6 +78,12 @@ char	*parse_expand(int i, char *str)
 	j = 0;
 	k = 0;
 	i = 0;
+	while (str[j] && str[j] != '"' && str[j] != '$' && str[j] != ' ')
+	{
+		if (str[j] != '\'')
+		temp = ft_strjoinchr(temp, str[j]);
+		j++;
+	}
 	temp = seq_dq(temp, str, &j, &k);
 	if (str[j] == '$')
 	{
