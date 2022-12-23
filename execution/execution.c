@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/23 23:16:46 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 03:49:02 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,36 @@ void	create_pipe(t_msvar **mvar)
 int	init_io(t_cblock *t_cmd, t_msvar **mvar)
 {
 	t_msvar	*tmp;
+	int i;
+
+	i = 0;
 
 	tmp = *mvar;
+
+	if(t_cmd->input)
+	{
+		while(t_cmd->input[i])
+		{
+			if(t_cmd->input[i][0] == '<')
+			{
+				tmp->f1=check_input(t_cmd->input[i]);
+				if (tmp->f1 == -1)
+			return (0);
+			}
+			else if(t_cmd->input[i][0] == '>')
+			{
+				tmp->f2 =check_output(t_cmd->input[i]);
+				if (tmp->f2 == -1)
+			return (0);
+			}
+			i++;
+		}
+		
+}
+return (1);
+}
+   /* {
+	]
 	
 	if (t_cmd->output)
 	{
@@ -64,7 +92,7 @@ int	init_io(t_cblock *t_cmd, t_msvar **mvar)
 			return (0);
 	}
 	return (1);
-}
+}*/
 
 void	mvar_init(t_msvar **mvar)
 {
@@ -80,12 +108,8 @@ void	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 	t_cblock	*tmp;
 	int			i;
 	int status;
-
-
-//t_elstprint(g_msv.env_list);
-
-	(void)env;
-
+		(void)env;
+		print_str(t_cmd->input);
 	//printf("\n------%d----\n",g_msv.exit_status);
 	mvar_init(&mvar);
 	create_pipe(&mvar);
