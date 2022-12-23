@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/23 23:38:41 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 02:44:20 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,15 @@ void	heredoc()
 	pipe(hfd);
 
 	cbd = g_msv.cmd_block_arr;
+	//print_str(cbd[g_msv.i].input);
 	while (cbd[g_msv.i].input[++i])
 	{
-		if (cbd[g_msv.i].input[i][0] == '<')
+		//	printf("hi all ---%s\n",cbd[g_msv.i].input[i]);
+		if (cbd[g_msv.i].input[i][0] == '<' && cbd[g_msv.i].input[i][1] == '<')
 		{
 			g_msv.in_heredoc = 1;
 			lsthd = i + 1;
-			doc = ft_strdup(&cbd[g_msv.i].input[i][1]);
+			doc = ft_strdup(&cbd[g_msv.i].input[i][2]);
 			close(hfd[0]);
 			pipe(hfd);
 			while (1)
@@ -166,9 +168,9 @@ void	parse(void)
 		heredoc();
 		if (g_msv.in_heredoc)
 			break ;
-		printf("input : %d -- output : %d  --command : %d\n",
-			cbd[g_msv.i].input_ctr,
-			cbd[g_msv.i].output_ctr,
-			cbd[g_msv.i].cmd_ctr);
+		// printf("input : %d -- output : %d  --command : %d\n",
+		// 	cbd[g_msv.i].input_ctr,
+		// 	cbd[g_msv.i].output_ctr,
+		// 	cbd[g_msv.i].cmd_ctr);
 	}
 }

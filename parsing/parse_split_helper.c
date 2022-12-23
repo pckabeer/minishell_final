@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 18:53:24 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/24 01:01:44 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 02:31:25 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 int	parse_split_gt(t_cblock *tcb, int i, int start, char *str)
 {
 	i++;
-	// if (str[i] == '>')
-	// 	i++;
+	if (str[i] == '>')
+		i++;
 	while (str[i] && str[i] == ' ')
 		i++;
 	while (str[i] && str[i] != ' ' && str[i] != '>' && str[i] != '<')
 		i++;
-	tcb->input_h = tb_join(str, tcb->output_h, start, i);
+
+	tcb->input_h = tb_join(str, tcb->input_h, start, i);
+					printf("hi all <---%s\n",tcb->input_h);
 	tcb->input_ctr++;
 	return (i);
 }
@@ -29,13 +31,16 @@ int	parse_split_gt(t_cblock *tcb, int i, int start, char *str)
 int	parse_split_lt(t_cblock *tcb, int i, int start, char *str)
 {
 	i++;
-	// if (str[i] == '<')
-	// 	i++;
+	if (str[i] == '<')
+		i++;
 	while (str[i] && str[i] == ' ')
 		i++;
 	while (str[i] && str[i] != ' ' && str[i] != '>' && str[i] != '<')
 		i++;
-	tcb->input_h = tb_join(str, tcb->input_h, start, i);
+	// printf("Variables : str - %s, start - %d, i - %d \n",str,start,i);
+	tcb->input_h = tb_join(str, tcb->input_h, start, i);					
+	// printf("hi all <---%s\n",tcb->input_h);
+
 	tcb->input_ctr++;
 	return (i);
 }

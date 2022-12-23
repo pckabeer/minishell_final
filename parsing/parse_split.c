@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 00:25:16 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/24 01:04:26 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 02:31:28 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ char	*tb_join(char *str, char *output, int start, int i)
 
 	tmp = calloc(2, 1);
 	tmp[0] = 2;
+	tmp[1] = '\0';
 	if (output)
 	{
 		output = ft_strjoin(output, tmp);
 		g_msv.b_temp = ft_substr(str, start, (i - start));
+		// printf("hi all <---Temp var : %s Output var :%s Temp var : %s\n",g_msv.b_temp,output,g_msv.b_temp );
 		g_msv.temp = output;
 		output = ft_strjoin(output, g_msv.b_temp);
 		free(g_msv.temp);
@@ -67,6 +69,7 @@ char	*tb_join(char *str, char *output, int start, int i)
 		free(g_msv.temp);
 		free(g_msv.b_temp);
 	}
+	free(tmp);
 	return (output);
 }
 
