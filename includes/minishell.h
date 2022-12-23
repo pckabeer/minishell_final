@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/23 19:40:51 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 22:17:35 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,8 +186,7 @@ void					ft_exec_export(t_msvar *lst);
 
 //***************Execution**************//
 int						count_cmd(t_cblock *t_cmd);
-void	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar);
-// int						execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar);
+void						execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar);
 char					*ft_strjoin(char const *s1, char const *s2);
 int						check_input(char **process_file);
 int						check_output(char **process_file);
