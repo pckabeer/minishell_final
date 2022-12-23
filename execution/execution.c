@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/24 03:49:02 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 03:55:00 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 	int			i;
 	int status;
 		(void)env;
-		print_str(t_cmd->input);
+	//	print_str(t_cmd->input);
 	//printf("\n------%d----\n",g_msv.exit_status);
 	mvar_init(&mvar);
 	create_pipe(&mvar);
