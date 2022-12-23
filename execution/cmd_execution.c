@@ -78,15 +78,19 @@ void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)
 	
 	if (!tmp->cmd)
 	{
+	//perror("test");
+	
+	//g_msv.exit_status=errno;
+	//printf("--------------%d--------",g_msv.exit_status);
 		if (ft_strrchr(temp->cmd[0], '/') )
-			ft_putstr_fd(" : No such file or directory\n", 2);
+			ft_putstr_fd(" : No such file or directory-----\n", 2);
 		else
-		{
+		{   
 			ft_putstr_fd("command not found: ", 2);
 			ft_putstr_fd(temp->cmd[0],2);
 			ft_putstr_fd("\n", 2);
 		}
-		exit(1);
+		exit(127);
 	}
 	ev = env_to_str(g_msv.env_list);
 //print_str(temp->cmd);
@@ -97,7 +101,8 @@ void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)
 		ft_putstr_fd(temp->cmd[0], 2);
 		perror("error_test:");
      g_msv.exit_status=errno;
-   clean_exit();
+	 exit(EXIT_FAILURE);
+  // clean_exit();
 	}
 }
 void print_str(char **str)

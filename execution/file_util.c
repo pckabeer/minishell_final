@@ -21,7 +21,7 @@ if(fd == -1)
 {
    perror("error_test:");
      g_msv.exit_status=errno;
-   clean_exit();
+  /// clean_exit();
 }
         }
 i++;
@@ -64,7 +64,7 @@ if(fd == -1)
   {
     perror("error_test:");
      g_msv.exit_status=errno;
-   clean_exit();
+ //  clean_exit();
 				
 }
 i++;

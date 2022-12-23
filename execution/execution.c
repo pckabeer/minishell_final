@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/22 18:44:37 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 17:10:03 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	mvar_init(t_msvar **mvar)
 	(*mvar)->f1 = -1;
 	(*mvar)->f2 = -1;
 	(*mvar)->cmd_num = (*mvar)->num_pipe + 1;
-	 g_msv.exit_status=0;
+	//g_msv.exit_status=0;
 }
 
 
@@ -77,11 +77,14 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 {
 	t_cblock	*tmp;
 	int			i;
+	int status;
 
 
 //t_elstprint(g_msv.env_list);
 
 	(void)env;
+
+	//printf("\n------%d----\n",g_msv.exit_status);
 	mvar_init(&mvar);
 	create_pipe(&mvar);
 	tmp = t_cmd;
@@ -149,9 +152,9 @@ int	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 	}
 
 
-	while (waitpid(-1, NULL, 0) > 0)
+	while (waitpid(-1, &(status), 0) > 0)
 			;
-			
+		g_msv.exit_status=WEXITSTATUS(status);
 	return (0);
 }
 
