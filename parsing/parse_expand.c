@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:02:23 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/23 23:30:40 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 00:46:43 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*seq_dq(char *temp, char *str, int *j, int *k)
 			}
 			(*j)++;
 		}
+	(*j)++;
 	}
 	return (temp);
 }
@@ -87,6 +88,7 @@ char	*parse_expand(int i, char *str)
 		j++;
 	}
 	temp = seq_dq(temp, str, &j, &k);
+		printf("--> string--1  : %s\n", temp);
 	if (str[j] == '$' && str[j+1] != ' ')
 	{
 		if (str[++j] == '?')
@@ -105,6 +107,8 @@ char	*parse_expand(int i, char *str)
 		if (k)
 		{
 			g_msv.b_temp = ft_get_dword_(str + j - k);
+						printf("--> string : %s\n", g_msv.b_temp );
+
 			g_msv.b_temp = ft_getenv(g_msv.b_temp, g_msv.env_list);
 			if (g_msv.b_temp)
 				temp = ft_strjoin(temp, g_msv.b_temp);
@@ -113,6 +117,7 @@ char	*parse_expand(int i, char *str)
 			temp = ft_strjoinchr(temp, '$');
 		k = 0;
 	}
+			//printf("--> string : %s\n", temp);
 	temp = trim_seq(temp, str, j);
 	return (temp);
 }

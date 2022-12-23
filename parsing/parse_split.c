@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 00:25:16 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/22 02:04:09 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 00:56:34 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	tblock_counter(t_cblock *tcb, char *str)
 {
 	int	i;
 	int	start;
+	char *temp = "";
 
 	if (g_msv.parse_error)
 		return ;
