@@ -9,6 +9,13 @@ void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 	j = 1;
 	(void)env;
 	(void)mvar;
+	(void)i;
+
+	//ft_putstr_fd(tmp->cmd[j], 1);	
+	/*if(i >0)
+	{
+		close(g_msv.fd[i-1][1]);
+	}*/
 
 	op=0;
 	while(tmp->cmd[j])
@@ -20,14 +27,14 @@ void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 		j++;
 
 	}
-	while (tmp->cmd[j + i])
+	while (tmp->cmd[j])
 		{
 			ft_putstr_fd(tmp->cmd[j++], 1);	
 			ft_putchar_fd(' ',1);
 		}
 	if(!op)
 			ft_putchar_fd('\n', 1);
-	exit(1);
+	exit(EXIT_SUCCESS);
 }
 
 void	pwdfn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)

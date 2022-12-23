@@ -19,6 +19,7 @@ void	execute_cmd_start(t_cblock *t_cmd, t_env *env, t_msvar **mvar, int k)
 	tmp->pid = fork();
 	if (tmp->pid == 0)
 	{
+	//	printf("\n*****%d*******",k);
 		i = k;
 		j = k - 1;
 		if ((tmp->f1 > -1))
@@ -38,6 +39,8 @@ void	execute_cmd_redirect(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 {
 	if (tmp->cmd)
 	{
+		//ft_putstr_fd(tmp->cmd[0],2);
+
 		if (strcmp(tmp->cmd[0], "echo") == 0)
 			echo_fn(tmp, env, mvar, i);
 		else if (strcmp(tmp->cmd[0], "export") == 0)
@@ -58,7 +61,7 @@ void	execute_cmd_redirect(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 		}
 	}
 	else
-		exit (1);
+		return ;
 }
 
 void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)

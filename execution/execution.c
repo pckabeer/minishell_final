@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/23 19:17:31 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/23 21:40:19 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ void	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 			g_msv.exit_status=errno;
 			return;
 		}
-if (!t_cmd->cmd[0])
-		return ;
+
+
 		if (mvar->cmd_num >= 1)
 		{
 		if ((strcmp(tmp->cmd[0], "export") == 0) && tmp->cmd[1])
@@ -139,21 +139,23 @@ if (!t_cmd->cmd[0])
 	//	print_str(tmp->cmd);
 		//print_str(tmp->output);
 
-		
-		execute_cmd_start(tmp, env, &mvar, i);
+		else
+			execute_cmd_start(tmp, env, &mvar, i);
 		}
+
+	if ((mvar)->f1 > -1)
+			close((mvar)->f1);
+		if ((mvar)->f2 > -1)
+			close((mvar)->f2);
 
 	if (mvar->cmd_num > 1)
 		{
 			if (i > 0)
 				close((mvar)->fd[i - 1][0]);
 			close((mvar)->fd[i][1]);
+			//printf("checking ----%d",i);
 		}
-		if ((mvar)->f1 > -1)
-			close((mvar)->f1);
-		if ((mvar)->f2 > -1)
-			close((mvar)->f2);
-
+	
 		i++;
 		tmp = tmp->next;
 	}
