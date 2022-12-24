@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/24 04:29:46 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 05:22:13 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,8 @@ int						ft_minusn(char *str);
 int						ft_elstprint_exp(t_env *lst);
 void					unset_fn(t_cblock *tmp, t_env *env);
 void					unset_env(char *key);
+char	*ft_strstr(const char *haystack, const char *needle);
+
 
 void					siginthandler1(int sig_num);
 void					siginthandler(int sig_num);
