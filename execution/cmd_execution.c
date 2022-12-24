@@ -117,6 +117,7 @@ void print_str(char **str)
    {
     while(str[i])
     {
+		ft_putnbr_fd(i,2);
 		ft_putendl_fd(str[i++],2);
 		
 
