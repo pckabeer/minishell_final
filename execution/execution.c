@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/24 03:55:00 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 12:47:25 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ void	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 		{
 			if (pipe(mvar->fd[i]) == -1)
 			{
-				perror("error_test:");
+				perror("
+				:");
      g_msv.exit_status=errno;
   return ;
 			}

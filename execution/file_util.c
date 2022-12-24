@@ -15,7 +15,7 @@ char *fname;
         else
         {
             fname = ft_substr(process_file,1,ft_strlen(process_file));
-fd = open(fname,O_RDONLY);
+fd = open(ft_strtrim(fname," "),O_RDONLY);
 if(fd == -1)
 {
    perror(fname);
@@ -42,9 +42,9 @@ char *fname;
            // temp++;
           // temp = ft_strchr(temp,'>');
           // printf("\nfilename-----%s",fname);
-			fd = open(fname, O_APPEND | O_RDWR);
+			fd = open(t_strtrim(fname," "), O_APPEND | O_RDWR);
 			if(fd ==-1)
-			fd = open(fname, O_TRUNC | O_CREAT | O_RDWR, 0000644);
+			fd = open(t_strtrim(fname," "), O_TRUNC | O_CREAT | O_RDWR, 0000644);
 			if(fd == -1)
   			{
     			perror("error2:");
@@ -55,7 +55,7 @@ char *fname;
 		else
     {
       fname = ft_substr(process_file,1,ft_strlen(process_file));
-		fd = open(fname, O_TRUNC | O_CREAT | O_RDWR, 0000644);
+		fd = open(t_strtrim(fname," "), O_TRUNC | O_CREAT | O_RDWR, 0000644);
 if(fd == -1)
   {
     perror(process_file);
