@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:03 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/23 20:51:32 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 22:17:28 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,6 @@ int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
-	// if(!g_msv.in_proc_active)
-	// 	signal(SIGQUIT, SIG_IGN);
-	// else
 	signal(SIGQUIT, siginthandler1);
 	signal(SIGINT, siginthandler);
 	init_minishell();
