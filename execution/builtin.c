@@ -30,7 +30,7 @@ void	echo_fn(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 	while (tmp->cmd[j])
 		{
 			ft_putstr_fd(tmp->cmd[j++], 1);	
-			ft_putchar_fd(' ',1);
+			//ft_putchar_fd(' ',1);
 		}
 	if(!op)
 			ft_putchar_fd('\n', 1);
