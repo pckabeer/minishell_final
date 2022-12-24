@@ -53,7 +53,7 @@ void	execute_cmd_redirect(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 		else if (strcmp(tmp->cmd[0], "env") == 0)
 		{
 			ft_elstprint(env);
-			ft_putstr_fd("\n",1);
+		//	ft_putstr_fd("\n",1);
 			exit(1);
 		}
 		else

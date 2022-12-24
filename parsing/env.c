@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:51:05 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/24 00:57:45 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 21:42:58 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	ft_elstprint(t_env *lst)
 	i = 0;
 	while (lst)
 	{
-		printf("%s = %s\n", lst->key, lst->value);
+		printf("%s=%s\n", lst->key, lst->value);
 		lst = lst->next;
 		i++;
 	}
