@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 16:29:56 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/23 23:31:41 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 03:20:32 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,5 @@ char	*ft_strjoinchr(char *str, char ch)
 	free(temp_two);
 	return (g_msv.temp);
 }
+
+

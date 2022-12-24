@@ -6,18 +6,18 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/23 23:15:38 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 04:25:55 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef MINISHELL_H
+#ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "../libft/libft.h"
 # include <dirent.h>
-# include <stdio.h>
 # include <signal.h>
 # include <stdbool.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/errno.h>
@@ -172,6 +172,8 @@ int						parse_split_dqh(t_cblock *tcb, int i, int start,
 							char *str);
 int						parse_split_h(t_cblock *tcb, int i, int start,
 							char *str);
+int						parse_split_dlr(t_cblock *tcb, int i, int start,
+							char *str);
 
 char					*parse_expand(int i, char *str);
 char					*parse_expand_io(int i, char *str);
@@ -186,7 +188,7 @@ void					ft_exec_export(t_msvar *lst);
 
 //***************Execution**************//
 int						count_cmd(t_cblock *t_cmd);
-void						execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar);
+void					execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar);
 char					*ft_strjoin(char const *s1, char const *s2);
 int						check_input(char **process_file);
 int						check_output(char **process_file);
@@ -211,7 +213,7 @@ int						cd_fn(t_cblock *tmp, t_env *env);
 int						export_fn(t_cblock *tmp);
 int						ft_minusn(char *str);
 int						ft_elstprint_exp(t_env *lst);
-void					unset_fn(t_cblock *tmp,t_env *env);
+void					unset_fn(t_cblock *tmp, t_env *env);
 void					unset_env(char *key);
 
 void					siginthandler1(int sig_num);
