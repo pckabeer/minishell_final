@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:03 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/24 22:17:28 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 22:21:08 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	init_minishell(void)
 	g_msv.w_count = 0;
 	g_msv.exit_flag = 0;
 	g_msv.block_list = NULL;
-	//g_msv.env_list = NULL;
 	g_msv.output = ft_calloc(32767, 1);
 	g_msv.temp = NULL;
 	g_msv.b_temp = NULL;
