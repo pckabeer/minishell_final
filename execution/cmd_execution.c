@@ -96,7 +96,7 @@ void	execute_cmd(t_cblock *temp, t_env *env, t_msvar **mvar, int i)
 		exit(127);
 	}
 	ev = env_to_str(g_msv.env_list);
-//print_str(temp->cmd);
+//print_str(ev);
 
 	if (execve((*mvar)->cmd, temp->cmd, ev) == -1)
 	{
