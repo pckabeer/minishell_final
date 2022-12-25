@@ -40,6 +40,7 @@ void	execute_cmd_redirect(t_cblock *tmp, t_env *env, t_msvar **mvar, int i)
 	if (tmp->cmd)
 	{
 		//ft_putstr_fd(tmp->cmd[0],2);
+		tmp->cmd[0]= ft_strtrim(tmp->cmd[0]," ");
 
 		if (strcmp(tmp->cmd[0], "echo") == 0)
 			echo_fn(tmp, env, mvar, i);
@@ -118,8 +119,8 @@ void print_str(char **str)
     while(str[i])
     {
 		ft_putnbr_fd(i,2);
+		// printf("-- %s - len %zu\n", str[i], ft_strlen(str[i]));
 		ft_putendl_fd(str[i++],2);
-		
 
     }
    }

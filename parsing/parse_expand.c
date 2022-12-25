@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:02:23 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/24 22:55:26 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 21:12:55 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ char	*parse_expand(int i, char *str)
 	j = 0;
 	k = 0;
 	i = 0;
-	// if(str[0] == '$' && !str[1])
-	// 	return ("$");
-	while (str[j] && str[j] != '"' && str[j] != '$' && str[j] != '\'' && str[j] != ' ')
+	// printf("HERE -- %s", str);
+	while (str[j] && str[j] != '"' && str[j] != '$' && str[j] != '\'')// && str[j] != ' ')
 	{
 		if (str[j] != '\'')
 		temp = ft_strjoinchr(temp, str[j]);
@@ -99,13 +98,17 @@ char	*parse_expand(int i, char *str)
 	temp = seq_dq(temp, str, &j, &k);
 	if (str[j] == '$' && str[j+1] != ' ')
 	{
+			//printf("--> string :---- %c\n", str[++j] );
 		if (str[++j] == '?')
 		{
+			// printf("--> string : %d\n", g_msv.exit_status );
 			temp = ft_strjoin(temp, ft_itoa(g_msv.exit_status));
 			j++;
 		}
-		else if ( str[j] == '\'' || str[j] == '"' || str[j] == ' ')
+		else if (str[j] == ' ' || !str[j])
 			temp = ft_strjoinchr(temp, '$');
+		// else if ( str[j] == '\'' || str[j] == '"' || str[j] == ' ' || !str[j])
+		// 	temp = ft_strjoinchr(temp, '$');
 
 		while (str[j] && str[j] != '"' && str[j] != ' ' && str[j] != '$' )
 		{
@@ -128,6 +131,8 @@ char	*parse_expand(int i, char *str)
 		k = 0;
 	}
 	//temp = trim_seq(temp, str, j);
+		// printf("HERE LAST -- %s - len %zu\n",temp, ft_strlen(temp));
+
 	return (temp);
 }
 

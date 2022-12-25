@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/25 16:07:00 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 22:10:59 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,78 @@ void	expand(void)
 	cbd = g_msv.cmd_block_arr;
 	ic = -1;
 	while (cbd[g_msv.i].cmd[++ic])
-		cbd[g_msv.i].cmd[ic] \
-			= ft_strjoinchr(parse_expand(g_msv.i, cbd[g_msv.i].cmd[ic]), '\0');
+		cbd[g_msv.i].cmd[ic] = ft_strjoinchr(parse_expand(g_msv.i,
+					cbd[g_msv.i].cmd[ic]), '\0');
 	ic = -1;
 	while (cbd[g_msv.i].input[++ic])
-		cbd[g_msv.i].input[ic] \
-			= ft_strjoin(parse_expand_io(g_msv.i, cbd[g_msv.i].input[ic]), "");
+		cbd[g_msv.i].input[ic] = ft_strjoin(parse_expand_io(g_msv.i,
+					cbd[g_msv.i].input[ic]), "");
 	ic = -1;
 	while (cbd[g_msv.i].output[++ic])
-		cbd[g_msv.i].output[ic] \
-			= ft_strjoin(parse_expand_io(g_msv.i, cbd[g_msv.i].output[ic]), "");
+		cbd[g_msv.i].output[ic] = ft_strjoin(parse_expand_io(g_msv.i,
+					cbd[g_msv.i].output[ic]), "");
+}
+
+// void	prexpand_helper(void)
+// {
+// 	t_cblock	*cbd;
+// 	int			ic;
+// 	char		ch[2];
+
+// 	ch[0] = 2;
+// 	ch[1] = '\0';
+// 	cbd = g_msv.cmd_block_arr;
+// 	int	ic;
+
+// 	ic = -1;
+// 	while (cbd[g_msv.i].cmd[++ic])
+// 	{
+// 		if (!ft_strncmp("$", cbd[g_msv.i].cmd[ic],
+// 				ft_strlen(cbd[g_msv.i].cmd[ic])))
+// 			if (cbd[g_msv.i].cmd[ic + 1][0] == '\'' ||
+// 				cbd[g_msv.i].cmd[ic + 1][0] == '"')
+// 				cbd[g_msv.i].cmd[ic] = ch;
+// 	}
+// }
+
+void	prexpand(void)
+{
+	t_cblock	*cbd;
+	int			ic;
+	char		ch[2];
+
+	ch[0] = 2;
+	ch[1] = '\0';
+	if (g_msv.parse_error)
+		return ;
+	cbd = g_msv.cmd_block_arr;
+	ic = -1;
+	while (cbd[g_msv.i].cmd[++ic])
+	{
+		if (!ft_strncmp("$", cbd[g_msv.i].cmd[ic],
+				ft_strlen(cbd[g_msv.i].cmd[ic])))
+			if (cbd[g_msv.i].cmd[ic + 1][0] == '\'' ||
+				cbd[g_msv.i].cmd[ic + 1][0] == '"')
+				cbd[g_msv.i].cmd[ic] = ch;
+	}
+	ic = -1;
+	while (cbd[g_msv.i].input[++ic])
+	{
+		if (!ft_strncmp("$", cbd[g_msv.i].input[ic],
+				ft_strlen(cbd[g_msv.i].input[ic])))
+			if (cbd[g_msv.i].input[ic + 1][0] == '\'' ||
+				cbd[g_msv.i].input[ic + 1][0] == '"')
+				cbd[g_msv.i].input[ic] = ch;
+	}
+	ic = -1;
+	while (cbd[g_msv.i].output[++ic])
+	{
+		if (!ft_strncmp("$", cbd[g_msv.i].output[ic],
+				ft_strlen(cbd[g_msv.i].output[ic])))
+			if (cbd[g_msv.i].output[ic + 1][0] == '\'' ||
+				cbd[g_msv.i].output[ic + 1][0] == '"')
+				cbd[g_msv.i].output[ic] = ch;
+	}
 }
 
 void	parse(void)
@@ -74,24 +136,14 @@ void	parse(void)
 		if (g_msv.i >= 1)
 			cbd[g_msv.i - 1].next = &cbd[g_msv.i];
 		init_t_cblock(&cbd[g_msv.i]);
-		g_msv.temp = g_msv.cmd_arr[g_msv.i];
-		g_msv.cmd_arr[g_msv.i] = ft_strtrim(g_msv.cmd_arr[g_msv.i], " ");
-		free(g_msv.temp);
 		tblock_counter(&cbd[g_msv.i], g_msv.cmd_arr[g_msv.i]);
 		cbd[g_msv.i].input = ft_split(cbd[g_msv.i].input_h, 2);
 		cbd[g_msv.i].output = ft_split(cbd[g_msv.i].output_h, 2);
 		cbd[g_msv.i].cmd = ft_split(cbd[g_msv.i].cmd_h, 2);
-		// print_str(cbd[g_msv.i].input);
-		// print_str(cbd[g_msv.i].cmd);
+		prexpand();
 		expand();
-		// print_str(cbd[g_msv.i].cmd);
-		// print_str(cbd[g_msv.i].input);
 		heredoc();
 		if (g_msv.in_heredoc)
 			break ;
-		// printf("input : %d -- output : %d  --command : %d\n",
-		// 	cbd[g_msv.i].input_ctr,
-		// 	cbd[g_msv.i].output_ctr,
-		// 	cbd[g_msv.i].cmd_ctr);
 	}
 }

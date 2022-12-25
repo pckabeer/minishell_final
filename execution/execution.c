@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/24 15:44:21 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 20:12:24 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 			return;
 		}
 
-
+		tmp->cmd[0]= ft_strtrim(tmp->cmd[0]," ");
 		if (mvar->cmd_num >= 1)
 		{
 		if ((strcmp(tmp->cmd[0], "export") == 0) && tmp->cmd[1])

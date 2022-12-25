@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:51:05 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/24 21:42:58 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 22:01:03 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,25 @@ void	load_env(char **env)
 
 void	unset_env(char *key)
 {
-	// t_env	*temp;
 	t_env	*env_list;
 	t_env	*env_lst_prev;
 
+	// t_env	*temp;
 	env_list = g_msv.env_list;
 	//*env_lst_prev = NULL;
 	while (env_list)
 	{
 		if (ft_strncmp(key, env_list->next->key, 32767) == 0)
-			{
-					//temp = env_list ;
-					env_list->next=env_list->next->next;
-				//	env_lst_prev = env_list->next;
-					
-					//free(temp);.
-					break ;
-			}
+		{
+			//temp = env_list ;
+			env_list->next = env_list->next->next;
+			//	env_lst_prev = env_list->next;
+			//free(temp);.
+			break ;
+		}
 		env_lst_prev = env_list;
 		env_list = env_list->next;
 	}
-	
 }
 
 void	export_env(char *key, char *value)
@@ -65,13 +63,13 @@ void	export_env(char *key, char *value)
 	t_env	*env_lst;
 
 	env_list = g_msv.env_list;
-	if(ft_getenv(key, env_list))
+	if (ft_getenv(key, env_list))
 	{
 		while (env_list)
 		{
 			if (ft_strncmp(key, env_list->key, 32767) == 0)
 			{
-				temp = env_list->value ;
+				temp = env_list->value;
 				env_list->value = value;
 				free(temp);
 				break ;
@@ -95,22 +93,16 @@ void	export_env(char *key, char *value)
 */
 char	*ft_getenv(char *str, t_env *env_list)
 {
-
-
 	//ft_elstprint(g_msv.env_list);
-	
 	env_list = g_msv.env_list;
-	
 	while (env_list)
 	{
-		if (ft_strncmp(str, ft_strtrim(env_list->key," "), 32767) == 0)
+		if (ft_strncmp(str, ft_strtrim(env_list->key, " "), 32767) == 0)
 			return (env_list->value);
 		env_list = env_list->next;
 	}
 	return (NULL);
 }
-
-
 
 int	ft_elstprint(t_env *lst)
 {
@@ -128,7 +120,7 @@ int	ft_elstprint(t_env *lst)
 
 int	ft_elstprint_exp(t_env *lst)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (lst)
