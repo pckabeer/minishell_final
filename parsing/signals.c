@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:19:38 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/24 22:19:52 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 14:34:50 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@ void	siginthandler1(int sig_num)
 		g_msv.exit_status = 131;
 		write(1, "Quit: 3\n", 9);
 	}
-	else if (g_msv.in_heredoc)
-		write(1, "\033[1;35m> \033[0m", 24);
-	else
-		write(1, "\033[1;35mminishell $ \033[0m", 24);
+	else //if (g_msv.in_heredoc)
+		{
+		rl_on_new_line();
+		rl_redisplay();
+		ft_putstr_fd("  \b\b", 2);
+		}
+	// else
+	// 	write(1, "\033[1;35mminishell $ \033[0m", 24);
 }
 
 void	siginthandler(int sig_num)
@@ -42,13 +46,25 @@ void	siginthandler(int sig_num)
 	else if (g_msv.in_heredoc)
 	{
 		g_msv.in_heredoc = 0;
-		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_redisplay();
+		ft_putstr_fd("  \b\b", 2);
+		 write(1, "\n", 1);
 	}
 	else
 	{
-		write(1, "\n", 1);
 		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+			rl_redisplay();
+			write(2, "  \n", 3);
+			rl_replace_line("", 0);
+			rl_on_new_line();
+			rl_redisplay();
+			// rl_on_new_line();
+			// rl_redisplay();
+			// ft_putstr_fd("  \b\b", 2);
+			// write(1, "\n", 1);
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
+		// rl_redisplay();
 	}
 }
