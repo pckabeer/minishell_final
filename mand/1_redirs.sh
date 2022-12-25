@@ -62,7 +62,7 @@ testing your minishell :)
 limm
 EOF
 
-cat << 'hello'
+cat << 'hello' #error
 $USER
 $NOVAR
 $HOME

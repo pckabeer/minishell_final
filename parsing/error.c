@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 19:10:45 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/23 20:17:09 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 22:35:02 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	parse_error(void)
 		ft_putstr_fd("minishell:  parse error near `|' ", 1);
 	else if (g_msv.parse_error == 7)
 		ft_putstr_fd("minishell:  syntax error near unexpected token `|' ", 1);
-		g_msv.exit_status = 258;
+	g_msv.exit_status = 258;
 	if(g_msv.parse_error != 121)
 		ft_putchar_fd('\n', 1);
 	ft_putstr_fd("\033[0m", 2);

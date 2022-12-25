@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 21:02:23 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/25 21:12:55 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 22:39:52 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char	*parse_expand(int i, char *str)
 	int			k;
 
 	temp = "";
+	(void) i;
 	if (g_msv.parse_error)
 		return (NULL);
 	j = 0;
@@ -143,6 +144,7 @@ char	*parse_expand_io(int i, char *str)
 	int			k;
 
 	temp = "";
+	(void) i;
 	if (g_msv.parse_error)
 		return (NULL);
 	j = 0;

@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/25 16:05:20 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 22:42:27 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <readline/readline.h>
 # define DELIMIT 2
 # include <fcntl.h>
+# include <sys/wait.h>
 
 typedef struct s_env
 {

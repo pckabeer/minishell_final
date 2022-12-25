@@ -22,7 +22,7 @@ echo 42 | echo no | echo smth | grep smth
 
 /bin/echo 1 | kaka
 
-echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e
+echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e   #error
 
 /bin/echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e
 
@@ -31,5 +31,5 @@ ls -la ../ | grep "."
 unset TEST | cat -e
 
 /bin/echo 1 > tmp_lol.c
-cat tmp_lol.c | cat > tmp_lol.c
-rm -rf tmp_lol.c
+cat tmp_lol.c | cat > tmp_lol.c #error
+rm -rf tmp_lol.c #error

@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:42:15 by skabeer           #+#    #+#             */
-/*   Updated: 2022/12/25 20:12:24 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 22:43:39 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ void	execution(t_cblock *t_cmd, t_env *env, t_msvar *mvar)
 
 
 	while (waitpid(-1, &(status), 0) > 0)
-			;
+	{;}
 		g_msv.exit_status=WEXITSTATUS(status);
 	return ;
 }
