@@ -6,35 +6,11 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/25 14:23:56 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 16:07:00 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	parse_split_elements(void)
-{
-	while (g_msv.rline[g_msv.i++])
-	{
-		if (g_msv.parse_error)
-			return ;
-		if (g_msv.parse_error == 1)
-			break ;
-		if (g_msv.rline[g_msv.i] == '\'')
-			parse_quote_block();
-		else if (g_msv.rline[g_msv.i] == '"')
-			parse_dquote_block();
-		else if (g_msv.rline[g_msv.i] == '$')
-			parse_dollar_block();
-		else if (g_msv.rline[g_msv.i] == '>')
-			parse_gt_block();
-		else if (g_msv.rline[g_msv.i] == '<')
-			parse_lt_block();
-		else if (g_msv.rline[g_msv.i] == '|')
-			parse_pipe_block();
-	}
-	g_msv.w_len = 0;
-}
 
 void	parse_count_pipe(void)
 {
@@ -54,6 +30,12 @@ void	parse_count_pipe(void)
 			parse_pipe_block();
 		g_msv.i++;
 	}
+	g_msv.freetemp = g_msv.cmd_arr;
+	g_msv.cmd_arr = ft_split(g_msv.rline, 2);
+	free(g_msv.freetemp);
+	g_msv.freetcb = g_msv.cmd_block_arr;
+	g_msv.cmd_block_arr = calloc(sizeof(t_cblock), g_msv.num_pipe + 1);
+	free(g_msv.freetcb);
 }
 
 void	expand(void)
@@ -85,9 +67,7 @@ void	parse(void)
 	if (g_msv.parse_error)
 		return ;
 	parse_count_pipe();
-	g_msv.cmd_arr = ft_split(g_msv.rline, 2);
 	g_msv.i = -1;
-	g_msv.cmd_block_arr = calloc(sizeof(t_cblock), g_msv.num_pipe + 1);
 	cbd = g_msv.cmd_block_arr;
 	while (g_msv.cmd_arr[++g_msv.i])
 	{
