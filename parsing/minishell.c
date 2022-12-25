@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:03 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/24 22:22:28 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 15:08:53 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	init_minishell(void)
 	g_msv.delimit = DELIMIT;
 	g_msv.in_heredoc = 0;
 	g_msv.in_proc_active = 0;
+	g_msv.h_code = 0;
+	g_msv.fbuff = NULL;
 }
 
 /*
@@ -57,6 +59,7 @@ void	read_loop_helper(void)
 			g_msv.parse_error = 121;
 		if (ft_strlen(g_msv.rline))
 			add_history(g_msv.rline);
+		//ft_hardcoder();
 	}
 	else
 		clean_exit();
@@ -76,7 +79,6 @@ int	read_loop(void)
 			if (!g_msv.parse_error)
 			{
 				g_msv.in_proc_active = 1;
-
 				execution(g_msv.cmd_block_arr, g_msv.env_list, &g_msv);
 			}
 			else

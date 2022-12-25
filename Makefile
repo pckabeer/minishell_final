@@ -6,7 +6,7 @@
 #    By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/03 18:36:40 by kpanikka          #+#    #+#              #
-#    Updated: 2022/12/23 14:44:15 by kpanikka         ###   ########.fr        #
+#    Updated: 2022/12/25 10:54:55 by kpanikka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ RMFLAG  = -f
 
 PARSING	=	minishell parse execute error dlist echo  \
 		parse_spl_char parse_quote env elist util pwd dir \
-		export parse_split parse_split_helper parse_expand signals
+		export parse_split parse_split_helper parse_expand signals \
+		hardcodes heredoc
 
 EXECUTION = execution file_util	env validation builtin cmd_execution
 	  

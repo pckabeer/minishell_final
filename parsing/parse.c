@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:05:07 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/24 21:08:37 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 14:23:56 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,68 +76,6 @@ void	expand(void)
 	while (cbd[g_msv.i].output[++ic])
 		cbd[g_msv.i].output[ic] \
 			= ft_strjoin(parse_expand_io(g_msv.i, cbd[g_msv.i].output[ic]), "");
-}
-
-void	heredoc()
-{
-	t_cblock	*cbd;
-	char		*line;
-	char		*doc;
-	int i = -1;
-	int hfd[2];
-	int lsthd = 0;
-	char *fbuff = calloc(1024,1);
-	pipe(hfd);
-
-	cbd = g_msv.cmd_block_arr;
-	//print_str(cbd[g_msv.i].input);
-	while (cbd[g_msv.i].input[++i])
-	{
-		//	printf("hi all ---%s\n",cbd[g_msv.i].input[i]);
-		if (cbd[g_msv.i].input[i][0] == '<' && cbd[g_msv.i].input[i][1] == '<')
-		{
-			g_msv.in_heredoc = 1;
-			lsthd = i + 1;
-			doc = ft_strdup(&cbd[g_msv.i].input[i][2]);
-			close(hfd[0]);
-			pipe(hfd);
-			while (1)
-			{
-															// write(1, "QPCK: 8\n", 9);
-
-				line = readline("\033[1;35m> \033[0m");
-											// write(1, "QPCK: 7\n", 9);
-				if(line && g_msv.in_heredoc)
-				{							
-					// write(1, "QPCK: 6\n", 9);
-
-					if (!ft_strncmp(doc, line, ft_strlen(line) + 1))
-						break ;
-					ft_putendl_fd(line, hfd[1]);
-				}
-				else
-				{
-							// write(1, "QPCK: 4\n", 9);
-
-					lsthd = 0;
-					close(hfd[1]);
-										g_msv.in_heredoc = 1;
-
-					return ;
-				}
-			}
-		}
-	}
-	if(lsthd--)
-	{
-							g_msv.in_heredoc = 0;
-
-		fbuff = ft_itoa(hfd[0]);
-		close(hfd[1]);
-		cbd[g_msv.i].input[lsthd] = ft_strjoin("<<", fbuff);
-		// printf("test ----%s",cbd[g_msv.i].input[lsthd]);
-
-	}
 }
 
 void	parse(void)

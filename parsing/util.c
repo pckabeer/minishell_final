@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 16:29:56 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/24 14:17:25 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/24 22:25:22 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_get_dword_(char *str)
 	int	i;
 
 	i = 0;
-	while (ft_isalnum(str[i])|| str[i] == '_')
+	while (ft_isalnum(str[i]) || str[i] == '_')
 		i++;
 	return (ft_substr(str, 0, i));
 }
@@ -52,8 +52,6 @@ char	*ft_strjoinchr(char *str, char ch)
 	return (g_msv.temp);
 }
 
-
-
 char	*ft_strstr(const char *haystack, const char *needle)
 {
 	size_t	i;
@@ -67,12 +65,11 @@ char	*ft_strstr(const char *haystack, const char *needle)
 		j = 0;
 		while ((needle[j]))
 		{
-			if(haystack[i] == needle[j])
+			if (haystack[i] == needle[j])
 				return ((char *)(haystack + i));
 			j++;
 		}
 		i++;
 	}
-	printf("ft_strstr: needle not found");
 	return (NULL);
 }
