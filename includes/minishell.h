@@ -6,7 +6,7 @@
 /*   By: kpanikka <kpanikka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:12:36 by kpanikka          #+#    #+#             */
-/*   Updated: 2022/12/24 05:22:13 by kpanikka         ###   ########.fr       */
+/*   Updated: 2022/12/25 15:06:37 by kpanikka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,11 @@ typedef struct minishellvariables
 	int					exit_status;
 	int					in_heredoc;
 	int					in_proc_active;
+	bool				h_code;
+	int					lsthdoc;
+	int					hfd[2];
+	char				*hdline;
+	char				*fbuff;
 }						t_msvar;
 
 t_msvar					g_msv;
@@ -215,11 +220,14 @@ int						ft_minusn(char *str);
 int						ft_elstprint_exp(t_env *lst);
 void					unset_fn(t_cblock *tmp, t_env *env);
 void					unset_env(char *key);
-char	*ft_strstr(const char *haystack, const char *needle);
+char					*ft_strstr(const char *haystack, const char *needle);
+void					ft_hardcoder();
 
 
 void					siginthandler1(int sig_num);
 void					siginthandler(int sig_num);
+
+void					heredoc(void);
 
 /******temp_util**************/
 
